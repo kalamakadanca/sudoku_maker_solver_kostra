@@ -1,0 +1,14 @@
+C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\bin\Debug\net9.0\sudoku_solver.exe
+C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\bin\Debug\net9.0\sudoku_solver.deps.json
+C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\bin\Debug\net9.0\sudoku_solver.runtimeconfig.json
+C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\bin\Debug\net9.0\sudoku_solver.dll
+C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\bin\Debug\net9.0\sudoku_solver.pdb
+C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\sudoku_solver.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\sudoku_solver.AssemblyInfoInputs.cache
+C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\sudoku_solver.AssemblyInfo.cs
+C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\sudoku_solver.csproj.CoreCompileInputs.cache
+C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\sudoku_solver.dll
+C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\refint\sudoku_solver.dll
+C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\sudoku_solver.pdb
+C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\sudoku_solver.genruntimeconfig.cache
+C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\ref\sudoku_solver.dll
