@@ -7,38 +7,22 @@ class Program
     {
         Random random = new Random();
         int[, ] sudoku = new int[9, 9];
-        HashSet<int> usedNumbers = new HashSet<int>();
-        Dictionary<int, HashSet<int>> col = new Dictionary<int, HashSet<int>>();
-        for (int i = 0; i < 9; i++)
-        {
-            col[i] = new HashSet<int>();
-        }
-        HashSet<int> rand_pick = new HashSet<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        List<int> seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int sez = seznam.Count-1;
 
-
-
-        // col[j] ma nekonecnou smycku - nevim proc - uz vim proc - ne vsechno je sudoku 🥀
-
-
-        for (int i = 0; i < 9; i++)
-        {
-            for (int j = 0; j < 9; j++)
-            {
-                rand_pick = new HashSet<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-                do {
-                    sudoku[i, j] = random.Next(rand_pick.Count()) + 1;
-
-                }  while (usedNumbers.Contains(sudoku[i, j]) || col[j].Contains(sudoku[i, j]));
-                rand_pick.Remove(sudoku[i, j]);
-
-                usedNumbers.Add(sudoku[i, j]);
-                col[j].Add(sudoku[i, j]);
-                Console.WriteLine($"i: {i}, j: {j}, sudoku[i, j]: {sudoku[i, j]}, usedNumbers: {string.Join(", ", usedNumbers)}, col[j]: {string.Join(", ", col[j])}");
+        for (int i = 0; i < 9; i += 3) {
+            for (int j = i; j < (i+3); j++) {
+                for (int k = i; k < (i+3); k++) {
+                    sudoku[j, k] = seznam[random.Next(sez)];
+                    seznam.Remove(sudoku[j, k]);
+                    sez = seznam.Count-1;
+                }
+                seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
+                sez = seznam.Count-1;
             }
-            usedNumbers.Clear();
         }
 
-        Console.WriteLine("Sudoku Puzzle:");
+
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9; j++)
@@ -47,7 +31,7 @@ class Program
             }
             Console.WriteLine();
         }
-
-        Console.ReadKey();
     }
 }
+
+// pattern filling & backtracking algorithm

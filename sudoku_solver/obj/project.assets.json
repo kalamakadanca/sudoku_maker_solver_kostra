@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Elik2\\OneDrive - sstebrno.cz\\zav_proj\\sudoku_solver\\sudoku_solver.csproj",
+      "projectUniqueName": "C:\\Users\\Elik2\\sudoku_maker_solver_kostra\\sudoku_solver\\sudoku_solver.csproj",
       "projectName": "sudoku_solver",
-      "projectPath": "C:\\Users\\Elik2\\OneDrive - sstebrno.cz\\zav_proj\\sudoku_solver\\sudoku_solver.csproj",
+      "projectPath": "C:\\Users\\Elik2\\sudoku_maker_solver_kostra\\sudoku_solver\\sudoku_solver.csproj",
       "packagesPath": "C:\\Users\\Elik2\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Elik2\\OneDrive - sstebrno.cz\\zav_proj\\sudoku_solver\\obj\\",
+      "outputPath": "C:\\Users\\Elik2\\sudoku_maker_solver_kostra\\sudoku_solver\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
