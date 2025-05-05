@@ -15,11 +15,11 @@ class Program
                 for (int k = i; k < (i+3); k++) {
                     sudoku[j, k] = seznam[random.Next(sez)];
                     seznam.Remove(sudoku[j, k]);
-                    sez = seznam.Count-1;
+                    sez--;
                 }
-                seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
-                sez = seznam.Count-1;
             }
+            seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
+            sez = seznam.Count-1;
         }
 
 
