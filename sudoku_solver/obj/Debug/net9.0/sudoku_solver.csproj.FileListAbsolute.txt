@@ -1,29 +1,44 @@
-C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\bin\Debug\net9.0\sudoku_solver.exe
-C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\bin\Debug\net9.0\sudoku_solver.deps.json
-C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\bin\Debug\net9.0\sudoku_solver.runtimeconfig.json
-C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\bin\Debug\net9.0\sudoku_solver.dll
-C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\bin\Debug\net9.0\sudoku_solver.pdb
-C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\sudoku_solver.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\sudoku_solver.AssemblyInfoInputs.cache
-C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\sudoku_solver.AssemblyInfo.cs
-C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\sudoku_solver.csproj.CoreCompileInputs.cache
-C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\sudoku_solver.dll
-C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\refint\sudoku_solver.dll
-C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\sudoku_solver.pdb
-C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\sudoku_solver.genruntimeconfig.cache
-C:\Users\Elik2\OneDrive - sstebrno.cz\zav_proj\sudoku_solver\obj\Debug\net9.0\ref\sudoku_solver.dll
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\bin\Debug\net9.0\sudoku_solver.exe
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\bin\Debug\net9.0\sudoku_solver.deps.json
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\bin\Debug\net9.0\sudoku_solver.runtimeconfig.json
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\bin\Debug\net9.0\sudoku_solver.dll
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\bin\Debug\net9.0\sudoku_solver.pdb
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\obj\Debug\net9.0\sudoku_solver.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\obj\Debug\net9.0\sudoku_solver.AssemblyInfoInputs.cache
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\obj\Debug\net9.0\sudoku_solver.AssemblyInfo.cs
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\obj\Debug\net9.0\sudoku_solver.csproj.CoreCompileInputs.cache
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\obj\Debug\net9.0\sudoku_solver.sourcelink.json
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\obj\Debug\net9.0\sudoku_solver.dll
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\obj\Debug\net9.0\refint\sudoku_solver.dll
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\obj\Debug\net9.0\sudoku_solver.pdb
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\obj\Debug\net9.0\sudoku_solver.genruntimeconfig.cache
-C:\Users\Elik2\sudoku_maker_solver_kostra\sudoku_solver\obj\Debug\net9.0\ref\sudoku_solver.dll
+C:/Users/Elik2/OneDrive - sstebrno.cz/zav_proj/sudoku_solver/bin/Debug/net9.0/sudoku_solver.exe
+C:/Users/Elik2/OneDrive - sstebrno.cz/zav_proj/sudoku_solver/bin/Debug/net9.0/sudoku_solver.deps.json
+C:/Users/Elik2/OneDrive - sstebrno.cz/zav_proj/sudoku_solver/bin/Debug/net9.0/sudoku_solver.runtimeconfig.json
+C:/Users/Elik2/OneDrive - sstebrno.cz/zav_proj/sudoku_solver/bin/Debug/net9.0/sudoku_solver.dll
+C:/Users/Elik2/OneDrive - sstebrno.cz/zav_proj/sudoku_solver/bin/Debug/net9.0/sudoku_solver.pdb
+C:/Users/Elik2/OneDrive - sstebrno.cz/zav_proj/sudoku_solver/obj/Debug/net9.0/sudoku_solver.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/Elik2/OneDrive - sstebrno.cz/zav_proj/sudoku_solver/obj/Debug/net9.0/sudoku_solver.AssemblyInfoInputs.cache
+C:/Users/Elik2/OneDrive - sstebrno.cz/zav_proj/sudoku_solver/obj/Debug/net9.0/sudoku_solver.AssemblyInfo.cs
+C:/Users/Elik2/OneDrive - sstebrno.cz/zav_proj/sudoku_solver/obj/Debug/net9.0/sudoku_solver.csproj.CoreCompileInputs.cache
+C:/Users/Elik2/OneDrive - sstebrno.cz/zav_proj/sudoku_solver/obj/Debug/net9.0/sudoku_solver.dll
+C:/Users/Elik2/OneDrive - sstebrno.cz/zav_proj/sudoku_solver/obj/Debug/net9.0/refint/sudoku_solver.dll
+C:/Users/Elik2/OneDrive - sstebrno.cz/zav_proj/sudoku_solver/obj/Debug/net9.0/sudoku_solver.pdb
+C:/Users/Elik2/OneDrive - sstebrno.cz/zav_proj/sudoku_solver/obj/Debug/net9.0/sudoku_solver.genruntimeconfig.cache
+C:/Users/Elik2/OneDrive - sstebrno.cz/zav_proj/sudoku_solver/obj/Debug/net9.0/ref/sudoku_solver.dll
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/bin/Debug/net9.0/sudoku_solver.exe
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/bin/Debug/net9.0/sudoku_solver.deps.json
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/bin/Debug/net9.0/sudoku_solver.runtimeconfig.json
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/bin/Debug/net9.0/sudoku_solver.dll
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/bin/Debug/net9.0/sudoku_solver.pdb
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.AssemblyInfoInputs.cache
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.AssemblyInfo.cs
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.csproj.CoreCompileInputs.cache
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.sourcelink.json
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.dll
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/refint/sudoku_solver.dll
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.pdb
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.genruntimeconfig.cache
+C:/Users/Elik2/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/ref/sudoku_solver.dll
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/bin/Debug/net9.0/sudoku_solver
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/bin/Debug/net9.0/sudoku_solver.deps.json
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/bin/Debug/net9.0/sudoku_solver.runtimeconfig.json
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/bin/Debug/net9.0/sudoku_solver.dll
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/bin/Debug/net9.0/sudoku_solver.pdb
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.GeneratedMSBuildEditorConfig.editorconfig
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.AssemblyInfoInputs.cache
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.AssemblyInfo.cs
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.csproj.CoreCompileInputs.cache
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.sourcelink.json
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.dll
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/refint/sudoku_solver.dll
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.pdb
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/sudoku_solver.genruntimeconfig.cache
+/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/obj/Debug/net9.0/ref/sudoku_solver.dll
