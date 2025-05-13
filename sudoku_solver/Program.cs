@@ -23,14 +23,9 @@ class Program
             seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
         }
 
-        int start_r;
-        int start_c;
 
-
-        for (int i = 0; i < 9; i += 3) {
-            for (int j = 0; j < 9; j += 3) {
-                start_r = i;
-                start_c = j;
+        for (int start_r = 0; start_r < 9; start_r += 3) {
+            for (int start_c = 0; start_c < 9; start_c += 3) {
 
                 seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
                 for (int k = 0; k < 3; k++) {
@@ -40,8 +35,7 @@ class Program
                             if (IsValidPlacement(start_r + k, start_c + l, temp_rnd, sudoku)) {
                                 sudoku[start_r + k, start_c + l] = temp_rnd;
                                 seznam.Remove(temp_rnd);
-                            }
-                            
+                            } 
                         }
                     }
                 }
