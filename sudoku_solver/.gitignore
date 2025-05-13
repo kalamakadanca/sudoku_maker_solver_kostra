@@ -11,20 +11,11 @@ obj/
 # Visual Studio Code
 .vscode/
 
-# Rider IDE
-.idea/
-
 # MacOS
 .DS_Store
 
 # Logs
 *.log
-
-# NuGet packages
-*.nupkg
-packages/
-project.lock.json
-project.fragment.lock.json
 
 # Others
 *.vspscc
@@ -47,6 +38,3 @@ publish/
 # Configuration
 appsettings.*.json
 secrets.json
-
-# dotCover
-.idea/.dotCover
