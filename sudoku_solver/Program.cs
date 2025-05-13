@@ -11,8 +11,7 @@ class Program
         List<int> seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int temp_rnd;
 
-        List<int> temporary_seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
-
+        // pattern filling
         for (int i = 0; i < 9; i += 3) {
             for (int j = i; j < (i+3); j++) {
                 for (int k = i; k < (i+3); k++) {
@@ -22,8 +21,9 @@ class Program
             }
             seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
         }
+        //
 
-
+        // filling the rest of the sudoku
         for (int start_r = 0; start_r < 9; start_r += 3) {
             for (int start_c = 0; start_c < 9; start_c += 3) {
 
@@ -41,8 +41,9 @@ class Program
                 }
             }
         }
+        //
 
-
+        // validating the chosen number
         static bool IsValidPlacement(int startRow, int startCol, int random_number, int[,] sudoku){
             bool isValid = true;
             for (int i = 0; i < 9; i++) {
@@ -58,6 +59,8 @@ class Program
             return isValid;
         }
 
+
+        // printing the sudoku
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9; j++)
