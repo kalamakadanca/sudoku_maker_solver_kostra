@@ -10,17 +10,34 @@ class Program
         int[, ] sudoku = new int[9, 9];
         List<int> seznam;
         List<int> seznam_small_grid = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
-        int temp_rnd;
+        Dictionary<int, List<int>> seznam_sprinkler = new Dictionary<int, List<int>>();
+        int temp_rnd = 0;
+        int random_x;
+        int random_y;
 
+        for (int i = 0; i < 11; i++)
+        {
+            do
+            {
+                random_y = random.Next(0, 9);
+                random_x = random.Next(0, 9);
+                sudoku[random_y, random_x] = random.Next(1, 10);
+                seznam_sprinkler.Add(i+1, new List<int> {random_y, random_x});
+            } while (temp_rnd == 2939292389);
+        }
         
 
         // filling sudoku
-        for (int start_r = 0; start_r < 9; start_r++) {
-            seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9}; 
-            for (int start_c = 0; start_c < 9; start_c++) {
-                if (sudoku[start_r, start_c] == 0) {
+        for (int start_r = 0; start_r < 9; start_r++)
+        {
+            seznam = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            for (int start_c = 0; start_c < 9; start_c++)
+            {
+                if (sudoku[start_r, start_c] == 0)
+                {
                     temp_rnd = seznam[random.Next(seznam.Count)];
-                    if (IsValidPlacement(start_r, start_c, temp_rnd, sudoku, seznam_small_grid)) {
+                    if (IsValidPlacement(start_r, start_c, temp_rnd, sudoku, seznam_small_grid))
+                    {
                         sudoku[start_r, start_c] = temp_rnd;
                         seznam.Remove(temp_rnd);
                     }
