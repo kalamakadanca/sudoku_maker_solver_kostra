@@ -8,25 +8,21 @@ class Program
     {
         Random random = new Random();
         int[, ] sudoku = new int[9, 9];
-        List<int> seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        List<int> seznam;
+        List<int> seznam_small_grid = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int temp_rnd;
 
         
 
         // filling sudoku
-        for (int start_r = 0; start_r < 9; start_r += 3) {
-            for (int start_c = 0; start_c < 9; start_c += 3) {
-
-                seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
-                for (int k = 0; k < 3; k++) {
-                    for (int l = 0; l < 3; l++) {
-                        if (sudoku[start_r + k, start_c + l] == 0) {
-                            temp_rnd = seznam[random.Next(seznam.Count)];
-                            if (IsValidPlacement(start_r + k, start_c + l, temp_rnd, sudoku)) {
-                                sudoku[start_r + k, start_c + l] = temp_rnd;
-                                seznam.Remove(temp_rnd);
-                            } 
-                        }
+        for (int start_r = 0; start_r < 9; start_r++) {
+            seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9}; 
+            for (int start_c = 0; start_c < 9; start_c++) {
+                if (sudoku[start_r, start_c] == 0) {
+                    temp_rnd = seznam[random.Next(seznam.Count)];
+                    if (IsValidPlacement(start_r, start_c, temp_rnd, sudoku, seznam_small_grid)) {
+                        sudoku[start_r, start_c] = temp_rnd;
+                        seznam.Remove(temp_rnd);
                     }
                 }
             }
@@ -34,8 +30,10 @@ class Program
         //
 
         // validating the chosen number
-        static bool IsValidPlacement(int startRow, int startCol, int random_number, int[,] sudoku){
+        static bool IsValidPlacement(int startRow, int startCol, int random_number, int[,] sudoku, List<int> seznam){
             bool isValid = true;
+            byte row_grid;
+            byte col_grid;
             for (int i = 0; i < 9; i++) {
                 if (sudoku[startRow, i] == random_number) {
                     isValid = false;
@@ -46,6 +44,24 @@ class Program
                     isValid = false;
                 }
             }
+
+            if (startRow < 3) row_grid = 0;
+            else if (startRow < 6) row_grid = 3;
+            else row_grid = 6;
+
+            if (startCol < 3) col_grid = 0;
+            else if (startCol < 6) col_grid = 3;
+            else col_grid = 6;
+
+            seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
+            for (int i = row_grid; i < row_grid + 3; i++) {
+                for (int j = col_grid; j < col_grid + 3; j++) {
+                    if (sudoku[i, j] == random_number) {
+                        isValid = false;
+                    }
+                }
+            }
+
             return isValid;
         }
 
@@ -66,6 +82,5 @@ class Program
 
 
 /* TODO:
-* 1. vymazat 3x3 grid v mainu a dat ho do funkce
-* 2. backtracking 🥀🥀🥀
+* 1. backtracking 🥀🥀🥀
 */
