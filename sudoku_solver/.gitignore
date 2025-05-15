@@ -38,6 +38,3 @@ publish/
 # Configuration
 appsettings.*.json
 secrets.json
-
-*.dll
-*.pdb
