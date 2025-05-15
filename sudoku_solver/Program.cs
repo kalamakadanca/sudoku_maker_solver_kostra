@@ -56,11 +56,22 @@ class Program
             seznam = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
             for (int i = row_grid; i < row_grid + 3; i++) {
                 for (int j = col_grid; j < col_grid + 3; j++) {
+                    if (sudoku[i, j] != 0) {
+                        seznam.Remove(sudoku[i, j]);
+                    }
+                }
+            }
+            Console.WriteLine("seznam: " + string.Join(", ", seznam));
+            for (int i = row_grid; i < row_grid + 3; i++) {
+                for (int j = col_grid; j < col_grid + 3; j++) {
                     if (sudoku[i, j] == random_number) {
                         isValid = false;
                     }
                 }
             }
+            Console.WriteLine("seznam: " + string.Join(", ", seznam));
+
+
 
             return isValid;
         }
