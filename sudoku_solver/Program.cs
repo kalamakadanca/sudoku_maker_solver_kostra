@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Security.Cryptography.X509Certificates;
 
 class Program
@@ -30,38 +31,48 @@ class Program
         }
         //
 
-
-        // filling sudoku
-        List<int> seznam;
-        int temp_rnd;
+        Solve(sudoku); // backtracking algorithm
         
-        for (int start_r = 0; start_r < 9; start_r++)
+        // filling sudoku
+        static bool Solve(int[,] sudoku)
         {
-            seznam = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            for (int start_c = 0; start_c < 9; start_c++)
+            for (int start_r = 0; start_r < 9; start_r++)
             {
-                if (sudoku[start_r, start_c] == 0)
+                for (int start_c = 0; start_c < 9; start_c++)
                 {
-                    temp_rnd = seznam[random.Next(seznam.Count)];
-                    if (IsValidPlacement(start_r, start_c, temp_rnd, sudoku))
+                    if (sudoku[start_r, start_c] == 0)
                     {
-                        sudoku[start_r, start_c] = temp_rnd;
-                        seznam.Remove(temp_rnd);
+                        for (int num = 1; num < 10; num++)
+                        {
+                            if (IsValidPlacement(start_r, start_c, num, sudoku))
+                            {
+                                sudoku[start_r, start_c] = num;
+
+                                if (Solve(sudoku)) return true;
+                                else
+                                {
+                                    sudoku[start_r, start_c] = 0;
+                                }
+                            }
+                        }
+                        return false;
+
                     }
                 }
             }
+            return true;
         }
         //
 
-        // printing the sudoku
-        for (int i = 0; i < 9; i++)
-        {
-            for (int j = 0; j < 9; j++)
+            // printing the sudoku
+            for (int i = 0; i < 9; i++)
             {
-                Console.Write(sudoku[i, j] + " ");
+                for (int j = 0; j < 9; j++)
+                {
+                    Console.Write(sudoku[i, j] + " ");
+                }
+                Console.WriteLine();
             }
-            Console.WriteLine();
-        }
         //
 
         // validating the chosen number
