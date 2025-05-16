@@ -9,32 +9,55 @@ class Program
     {
         Random random = new Random();
         int[, ] sudoku = new int[9, 9];
+        bool answer = false;
+
+        while (!answer) {
+            Array.Clear(sudoku, 0, sudoku.Length);
+            sprinkler(sudoku, random);
+            answer = Solve(sudoku, answer);
+        }
+
+        // printing the sudoku
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                Console.Write(sudoku[i, j] + " ");
+            }
+            Console.WriteLine();
+        }
+        //
+
+
 
         // filling the sudoku with 11 random numbers
-        int random_x;
-        int random_y;
-        int sprinkler_random_number;
-
-        for (int i = 0; i < 11; i++)
+        static void sprinkler(int[,] sudoku, Random random)
         {
-            sprinkler_random_number = random.Next(1, 10);
-            random_y = random.Next(0, 9);
-            random_x = random.Next(0, 9);
-            if (IsValidPlacement(random_y, random_x, sprinkler_random_number, sudoku) && sudoku[random_y, random_x] == 0)
+
+            int random_x;
+            int random_y;
+            int sprinkler_random_number;
+            sudoku[0, 0] = random.Next(1, 10);
+            for (int i = 0; i < 10; i++)
             {
-                sudoku[random_y, random_x] = sprinkler_random_number;
-            }
-            else
-            {
-                i--;
+
+                sprinkler_random_number = random.Next(1, 10);
+                random_y = random.Next(0, 9);
+                random_x = random.Next(0, 9);
+                if (IsValidPlacement(random_y, random_x, sprinkler_random_number, sudoku) && sudoku[random_y, random_x] == 0)
+                {
+                    sudoku[random_y, random_x] = sprinkler_random_number;
+                }
+                else
+                {
+                    i--;
+                }
             }
         }
         //
 
-        Solve(sudoku); // backtracking algorithm
-        
         // filling sudoku
-        static bool Solve(int[,] sudoku)
+        static bool Solve(int[,] sudoku, bool answer)
         {
             for (int start_r = 0; start_r < 9; start_r++)
             {
@@ -48,7 +71,7 @@ class Program
                             {
                                 sudoku[start_r, start_c] = num;
 
-                                if (Solve(sudoku)) return true;
+                                if (Solve(sudoku, answer)) return true;
                                 else
                                 {
                                     sudoku[start_r, start_c] = 0;
@@ -61,25 +84,15 @@ class Program
                 }
             }
             return true;
+
         }
         //
-
-            // printing the sudoku
-            for (int i = 0; i < 9; i++)
-            {
-                for (int j = 0; j < 9; j++)
-                {
-                    Console.Write(sudoku[i, j] + " ");
-                }
-                Console.WriteLine();
-            }
-        //
-
+        
         // validating the chosen number
         static bool IsValidPlacement(int startRow, int startCol, int random_number, int[,] sudoku)
         {
             bool isValid = true;
-            
+
             for (int i = 0; i < 9; i++)
             {
                 if (sudoku[startRow, i] == random_number)
@@ -113,10 +126,3 @@ class Program
         //
     }
 }
-
-// backtracking algorithm
-
-
-/* TODO:
-* 1. backtracking 🥀🥀🥀
-*/
