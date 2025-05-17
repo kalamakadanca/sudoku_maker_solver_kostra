@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 
 using System.Diagnostics;
 using Iced.Intel;
+using System.Runtime.CompilerServices;
 
 class Program
 {
@@ -22,7 +23,6 @@ class Program
             answer = Solve(sudoku, answer);
             if (answer)
             {
-                Console.WriteLine("Sudoku je vyřešeno.");
                 PrintSudoku(sudoku);
             }
         }
@@ -96,17 +96,9 @@ class Program
                 Console.WriteLine();
             }
         }
-
-        for (int i = 0; i < 9; i++)
-        {
-            for (int j = 0; j < 9; j++)
-            {
-                Console.Write(sudoku[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
         //
 
+        // counting the number of full numbers in the sudoku
         static int number_of_full_numbers(int[,] sudoku)
         {
             int number_of_full_numbers = 0;
@@ -122,6 +114,7 @@ class Program
             }
             return number_of_full_numbers;
         }
+        //
 
 
 
@@ -129,30 +122,32 @@ class Program
         // difficulty - 1 - nejjednodušší
         static void difficulty_1(int[,] sudoku, Random random, bool answer)
         {
-            while (number_of_full_numbers(sudoku) > 50)
+            int attempts = 0;
+            int random_y;
+            int random_x;
+            int original;
+
+            while (number_of_full_numbers(sudoku) > 50 && attempts < 1000)
             {
-                int random_y;
-                int random_x;
-                int random_number;
+                random_y = random.Next(0, 9);
+                random_x = random.Next(0, 9);
+                original = sudoku[random_y, random_x];
+                bool isValid = true;
+
+                if (sudoku[random_y, random_x] == 0) continue;
 
                 for (int i = 1; i < 10; i++)
                 {
-                    random_y = random.Next(0, 9);
-                    random_x = random.Next(0, 9);
-                    random_number = sudoku[random_y, random_x];
-
                     sudoku[random_y, random_x] = i;
-                    Solve(sudoku, answer);
-                    if (!Solve(sudoku, answer))
-                    {
-                        sudoku[random_y, random_x] = 0;
-                    }
+
+                    if (sudoku[random_y, random_x] == original) continue;
                     else
                     {
-                        sudoku[random_y, random_x] = random_number;
-                        i--;
+                        
                     }
                 }
+
+                Console.WriteLine(number_of_full_numbers(sudoku));
             }
             //
         }
