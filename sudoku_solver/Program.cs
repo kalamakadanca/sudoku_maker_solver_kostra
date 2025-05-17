@@ -3,21 +3,100 @@ using System.Collections.Generic;
 using System.Data;
 using System.Security.Cryptography.X509Certificates;
 
+using System.Diagnostics;
+using Iced.Intel;
+
 class Program
 {
     static void Main(string[] args)
     {
         Random random = new Random();
-        int[, ] sudoku = new int[9, 9];
+        int[,] sudoku = new int[9, 9];
         bool answer = false;
+        Stopwatch sw = Stopwatch.StartNew();
 
-        while (!answer) {
+        while (!answer)
+        {
             Array.Clear(sudoku, 0, sudoku.Length);
             sprinkler(sudoku, random);
             answer = Solve(sudoku, answer);
+            if (answer)
+            {
+                Console.WriteLine("Sudoku je vyřešeno.");
+                PrintSudoku(sudoku);
+            }
+        }
+        answer = false;
+
+        bool end_game = false;
+        int difficulty = 0;
+        while (!end_game)
+        {
+            Console.WriteLine("Vítejte v sudoku!");
+            Console.WriteLine();
+
+            // choosing the difficulty
+            while (difficulty == 0)
+            {
+                Console.WriteLine("Vyber si úroveň obtížnosti:");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("1. Nejsnadnější");
+                Console.WriteLine("2. Snadná");
+                Console.WriteLine("3. Střední");
+                Console.WriteLine("4. Těžká");
+                Console.WriteLine("5. Nejtěžší");
+                Console.WriteLine("6. Vypnout hru");
+                Console.WriteLine("7. zkoušení metody");
+                Console.ResetColor();
+                difficulty = int.Parse(Console.ReadLine());
+            }
+            switch (difficulty)
+            {
+                case 1:
+                    Console.WriteLine("Vybrali jste si nejsnadnější obtížnost.");
+                    break;
+                case 2:
+                    Console.WriteLine("Vybrali jste si snadnou obtížnost.");
+                    break;
+                case 3:
+                    Console.WriteLine("Vybrali jste si střední obtížnost.");
+                    break;
+                case 4:
+                    Console.WriteLine("Vybrali jste si těžkou obtížnost.");
+                    break;
+                case 5:
+                    Console.WriteLine("Vybrali jste si nejtěžší obtížnost.");
+                    break;
+                case 6:
+                    end_game = true;
+                    break;
+                case 7:
+                    difficulty_1(sudoku, random, answer);
+                    PrintSudoku(sudoku);
+                    break;
+                default:
+                    Console.WriteLine("Neplatná volba. Zkuste to znovu.");
+                    break;
+            }
+            //
+            Console.WriteLine();
         }
 
+
         // printing the sudoku
+        static void PrintSudoku(int[,] sudoku)
+        {
+            Console.WriteLine("Sudoku:");
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    Console.Write(sudoku[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9; j++)
@@ -28,8 +107,85 @@ class Program
         }
         //
 
+        static int number_of_full_numbers(int[,] sudoku)
+        {
+            int number_of_full_numbers = 0;
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (sudoku[i, j] != 0)
+                    {
+                        number_of_full_numbers++;
+                    }
+                }
+            }
+            return number_of_full_numbers;
+        }
 
 
+
+
+        // difficulty - 1 - nejjednodušší
+        static void difficulty_1(int[,] sudoku, Random random, bool answer)
+        {
+            while (number_of_full_numbers(sudoku) > 50)
+            {
+                int random_y;
+                int random_x;
+                int random_number;
+
+                for (int i = 1; i < 10; i++)
+                {
+                    random_y = random.Next(0, 9);
+                    random_x = random.Next(0, 9);
+                    random_number = sudoku[random_y, random_x];
+
+                    sudoku[random_y, random_x] = i;
+                    Solve(sudoku, answer);
+                    if (!Solve(sudoku, answer))
+                    {
+                        sudoku[random_y, random_x] = 0;
+                    }
+                    else
+                    {
+                        sudoku[random_y, random_x] = random_number;
+                        i--;
+                    }
+                }
+            }
+            //
+        }
+
+
+
+
+
+
+
+
+
+        // difficulty - 2 - snadná
+        //
+        // difficulty - 3 - střední
+        //
+        // difficulty - 4 - těžká
+        //
+        // difficulty - 5 - nejtěžší
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // MAKING THE SUDOKU
         // filling the sudoku with 11 random numbers
         static void sprinkler(int[,] sudoku, Random random)
         {
@@ -87,7 +243,7 @@ class Program
 
         }
         //
-        
+
         // validating the chosen number
         static bool IsValidPlacement(int startRow, int startCol, int random_number, int[,] sudoku)
         {
@@ -124,5 +280,10 @@ class Program
             return isValid;
         }
         //
+        // ###
+
+        // printing the time
+        sw.Stop();
+        Console.WriteLine("Time taken: " + sw.ElapsedMilliseconds + " ms");
     }
 }
