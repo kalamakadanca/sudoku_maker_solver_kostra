@@ -4,7 +4,6 @@ using System.Data;
 using System.Security.Cryptography.X509Certificates;
 
 using System.Diagnostics;
-using Iced.Intel;
 using System.Runtime.CompilerServices;
 
 class Program
@@ -71,7 +70,8 @@ class Program
                     end_game = true;
                     break;
                 case 7:
-                    Console.WriteLine(zkouska(sudoku));
+                    PrintSudoku(sudoku);
+                    difficulty_1(sudoku, random);
                     PrintSudoku(sudoku);
                     end_game = true;
                     break;
@@ -126,12 +126,42 @@ class Program
 
 
         // difficulty - 1 - nejjednodušší
-        static void difficulty_1(int[,] sudoku, Random random, bool answer)
+        static void difficulty_1(int[,] sudoku, Random random)
         {
             int random_x;
             int random_y;
             int original_number;
+            bool answer;
 
+            for (int i = 0; i < 9; i++)
+            {
+                answer = false;
+                random_x = random.Next(0, 9);
+                random_y = random.Next(0, 9);
+                original_number = sudoku[random_x, random_y];
+
+                if (sudoku[random_x, random_y] == 0) continue;
+
+                for (int j = 1; j < 10; j++)
+                {
+                    if (j == original_number) continue;
+                    else
+                    {
+                        sudoku[random_x, random_y] = j;
+                        if (Solve(sudoku, false))
+                        {
+                            sudoku[random_x, random_y] = original_number;
+                            answer = true;
+                            break;
+                        }
+                    }
+                }
+                if (!answer)
+                {
+                    sudoku[random_x, random_y] = 0;
+                }
+
+            }
 
 
         }
@@ -156,6 +186,32 @@ class Program
 
 
 
+        static bool SolveMultiple(int[,] sudoku, ref int count, int maxCount)
+        {
+            for (int r = 0; r < 9; r++)
+            {
+                for (int c = 0; c < 9; c++)
+                {
+                    if (sudoku[r, c] == 0)
+                    {
+                        for (int num = 1; num <= 9; num++)
+                        {
+                            if (IsValidPlacement(r, c, num, sudoku))
+                            {
+                                sudoku[r, c] = num;
+                                if (SolveMultiple(sudoku, ref count, maxCount))
+                                    return true;
+                                sudoku[r, c] = 0;
+                            }
+                        }
+                        return false;
+                    }
+                }
+            }
+
+            count++;
+            return count >= maxCount;
+        }
 
 
 
