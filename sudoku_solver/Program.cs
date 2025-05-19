@@ -71,8 +71,9 @@ class Program
                     end_game = true;
                     break;
                 case 7:
-                    difficulty_1(sudoku, random, answer);
+                    Console.WriteLine(zkouska(sudoku));
                     PrintSudoku(sudoku);
+                    end_game = true;
                     break;
                 default:
                     Console.WriteLine("Neplatná volba. Zkuste to znovu.");
@@ -116,41 +117,25 @@ class Program
         }
         //
 
-
+        static bool zkouska(int[,] sudoku)
+        {
+            sudoku[0, 0] = 0;
+            Console.WriteLine(number_of_full_numbers(sudoku));
+            return Solve(sudoku, false);
+        }
 
 
         // difficulty - 1 - nejjednodušší
         static void difficulty_1(int[,] sudoku, Random random, bool answer)
         {
-            int attempts = 0;
-            int random_y;
             int random_x;
-            int original;
+            int random_y;
+            int original_number;
 
-            while (number_of_full_numbers(sudoku) > 50 && attempts < 1000)
-            {
-                random_y = random.Next(0, 9);
-                random_x = random.Next(0, 9);
-                original = sudoku[random_y, random_x];
-                bool isValid = true;
 
-                if (sudoku[random_y, random_x] == 0) continue;
 
-                for (int i = 1; i < 10; i++)
-                {
-                    sudoku[random_y, random_x] = i;
-
-                    if (sudoku[random_y, random_x] == original) continue;
-                    else
-                    {
-                        
-                    }
-                }
-
-                Console.WriteLine(number_of_full_numbers(sudoku));
-            }
-            //
         }
+        //
 
 
 
