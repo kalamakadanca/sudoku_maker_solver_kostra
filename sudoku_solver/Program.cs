@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
 class Program
 {
@@ -117,53 +118,31 @@ class Program
         }
         //
 
-        static bool zkouska(int[,] sudoku)
-        {
-            sudoku[0, 0] = 0;
-            Console.WriteLine(number_of_full_numbers(sudoku));
-            return Solve(sudoku, false);
-        }
-
 
         // difficulty - 1 - nejjednodušší
         static void difficulty_1(int[,] sudoku, Random random)
         {
-            int random_x;
-            int random_y;
-            int original_number;
-            bool answer;
-
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 30; i++)
             {
-                answer = false;
-                random_x = random.Next(0, 9);
-                random_y = random.Next(0, 9);
-                original_number = sudoku[random_x, random_y];
+                int random_x = random.Next(0, 9);
+                int random_y = random.Next(0, 9);
+                int original_number = sudoku[random_x, random_y];
+                int count_row;
+                int count_col;
+                validRow_Col(random_x, random_y, sudoku, out count_row, out count_col);
 
-                if (sudoku[random_x, random_y] == 0) continue;
 
-                for (int j = 1; j < 10; j++)
+
+                if (CountSolutions(sudoku) == 1)
                 {
-                    if (j == original_number) continue;
-                    else
-                    {
-                        sudoku[random_x, random_y] = j;
-                        if (Solve(sudoku, false))
-                        {
-                            sudoku[random_x, random_y] = original_number;
-                            answer = true;
-                            break;
-                        }
-                    }
+                    if (count_row >= 5 && count_col >= 5) sudoku[random_x, random_y] = 0;
+                    else i--;
                 }
-                if (!answer)
+                else
                 {
-                    sudoku[random_x, random_y] = 0;
+                    sudoku[random_x, random_y] = original_number;
                 }
-
             }
-
-
         }
         //
 
@@ -184,8 +163,34 @@ class Program
         // difficulty - 5 - nejtěžší
 
 
+        static void validRow_Col(int row, int col, int[,] sudoku, out int count_row, out int count_col)
+        {
+            count_row = 0;
+            count_col = 0;
+            for (int i = 0; i < 9; i++)
+            {
+                if (sudoku[row, i] != 0)
+                {
+                    count_row++;
+                }
+            }
+            for (int i = 0; i < 9; i++)
+            {
+                if (sudoku[i, col] != 0)
+                {
+                    count_col++;
+                }
+            }
+        }
 
-
+        // counting possible solutions
+        static int CountSolutions(int[,] sudoku)
+        {
+            int count = 0;
+            SolveMultiple(sudoku, ref count, 2);
+            return count;
+        }
+        // recursive backtracking for level maintenance
         static bool SolveMultiple(int[,] sudoku, ref int count, int maxCount)
         {
             for (int r = 0; r < 9; r++)
