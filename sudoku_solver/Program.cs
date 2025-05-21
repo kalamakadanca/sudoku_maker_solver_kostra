@@ -55,6 +55,8 @@ class Program
             {
                 case 1:
                     Console.WriteLine("Vybrali jste si nejsnadnější obtížnost.");
+                    difficulty_1(sudoku, random);
+                    PrintSudoku(sudoku);
                     break;
                 case 2:
                     Console.WriteLine("Vybrali jste si snadnou obtížnost.");
@@ -73,7 +75,7 @@ class Program
                     break;
                 case 7:
                     PrintSudoku(sudoku);
-                    difficulty_1(sudoku, random);
+                    difficulty_2(sudoku, random);
                     PrintSudoku(sudoku);
                     end_game = true;
                     break;
@@ -101,23 +103,6 @@ class Program
         }
         //
 
-        // counting the number of full numbers in the sudoku
-        static int number_of_full_numbers(int[,] sudoku)
-        {
-            int number_of_full_numbers = 0;
-            for (int i = 0; i < 9; i++)
-            {
-                for (int j = 0; j < 9; j++)
-                {
-                    if (sudoku[i, j] != 0)
-                    {
-                        number_of_full_numbers++;
-                    }
-                }
-            }
-            return number_of_full_numbers;
-        }
-        //
 
 
         // difficulty - 1 - nejjednodušší
@@ -153,26 +138,70 @@ class Program
                 }
                 if (i == 28 && number_of_full_numbers(sudoku) > 61) i = 0;
             }
-            Console.WriteLine(81 - number_of_full_numbers(sudoku));
         }
         //
 
-
-
-
-
-
-
-
-
         // difficulty - 2 - snadná
+        static void difficulty_2(int[,] sudoku, Random random)
+        {
+            for (int i = 0; i < 45; i++)
+            {
+                int random_x = random.Next(0, 9);
+                int random_y = random.Next(0, 9);
+                int original_number = sudoku[random_x, random_y];
+
+                if (sudoku[random_x, random_y] == 0)
+                {
+                    i--;
+                    continue;
+                }
+
+                sudoku[random_x, random_y] = 0;
+                validRow_Col(random_x, random_y, sudoku, out int count_row, out int count_col);
+
+                if (CountSolutions(sudoku) == 1)
+                {
+                    if (count_row < 4 || count_col < 4)
+                    {
+                        sudoku[random_x, random_y] = original_number;
+                        i++;
+                    }
+
+                }
+                else
+                {
+                    sudoku[random_x, random_y] = original_number;
+                }
+                if (i == 43 && number_of_full_numbers(sudoku) > 49) i = 0;
+            }
+        }
         //
         // difficulty - 3 - střední
         //
         // difficulty - 4 - těžká
         //
         // difficulty - 5 - nejtěžší
+        //
 
+
+
+        // counting the number of full numbers in the sudoku
+        static int number_of_full_numbers(int[,] sudoku)
+        {
+            int number_of_full_numbers = 0;
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (sudoku[i, j] != 0)
+                    {
+                        number_of_full_numbers++;
+                    }
+                }
+            }
+            return number_of_full_numbers;
+        }
+        //
 
         static void validRow_Col(int row, int col, int[,] sudoku, out int count_row, out int count_col)
         {
@@ -192,8 +221,6 @@ class Program
                     count_col++;
                 }
             }
-            Console.WriteLine("Count row: " + count_row);
-            Console.WriteLine("Count col: " + count_col);
         }
 
         // counting possible solutions
@@ -203,6 +230,7 @@ class Program
             SolveMultiple(sudoku, ref count, 2);
             return count;
         }
+
         // recursive backtracking for level maintenance
         static bool SolveMultiple(int[,] sudoku, ref int count, int maxCount)
         {
