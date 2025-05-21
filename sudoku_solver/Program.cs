@@ -30,6 +30,7 @@ class Program
 
         bool end_game = false;
         int difficulty = 0;
+        //MAIN GAME LOOP
         while (!end_game)
         {
             Console.WriteLine("Vítejte v sudoku!");
@@ -127,22 +128,32 @@ class Program
                 int random_x = random.Next(0, 9);
                 int random_y = random.Next(0, 9);
                 int original_number = sudoku[random_x, random_y];
-                int count_row;
-                int count_col;
-                validRow_Col(random_x, random_y, sudoku, out count_row, out count_col);
 
+                if (sudoku[random_x, random_y] == 0)
+                {
+                    i--;
+                    continue;
+                }
 
+                sudoku[random_x, random_y] = 0;
+                validRow_Col(random_x, random_y, sudoku, out int count_row, out int count_col);
 
                 if (CountSolutions(sudoku) == 1)
                 {
-                    if (count_row >= 5 && count_col >= 5) sudoku[random_x, random_y] = 0;
-                    else i--;
+                    if (count_row < 5 || count_col < 5)
+                    {
+                        sudoku[random_x, random_y] = original_number;
+                        i++;
+                    }
+
                 }
                 else
                 {
                     sudoku[random_x, random_y] = original_number;
                 }
+                if (i == 28 && number_of_full_numbers(sudoku) > 61) i = 0;
             }
+            Console.WriteLine(81 - number_of_full_numbers(sudoku));
         }
         //
 
@@ -181,6 +192,8 @@ class Program
                     count_col++;
                 }
             }
+            Console.WriteLine("Count row: " + count_row);
+            Console.WriteLine("Count col: " + count_col);
         }
 
         // counting possible solutions
@@ -217,10 +230,6 @@ class Program
             count++;
             return count >= maxCount;
         }
-
-
-
-
 
 
 

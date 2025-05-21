@@ -1728,24 +1728,32 @@
     ]
   },
   "packageFolders": {
-    "/Users/kalamakadanca/.nuget/packages/": {}
+    "C:\\Users\\Elik2\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/sudoku_solver.csproj",
+      "projectUniqueName": "C:\\Users\\Elik2\\sudoku_maker_solver_kostra\\sudoku_solver\\sudoku_solver.csproj",
       "projectName": "sudoku_solver",
-      "projectPath": "/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/sudoku_solver.csproj",
-      "packagesPath": "/Users/kalamakadanca/.nuget/packages/",
-      "outputPath": "/Users/kalamakadanca/sudoku_maker_solver_kostra/sudoku_solver/obj/",
+      "projectPath": "C:\\Users\\Elik2\\sudoku_maker_solver_kostra\\sudoku_solver\\sudoku_solver.csproj",
+      "packagesPath": "C:\\Users\\Elik2\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Elik2\\sudoku_maker_solver_kostra\\sudoku_solver\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/kalamakadanca/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Elik2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1764,7 +1772,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -1791,7 +1799,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
