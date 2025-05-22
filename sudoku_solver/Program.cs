@@ -28,6 +28,15 @@ class Program
         }
         answer = false;
 
+        int[,] sudoku_copy = new int[9, 9];
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                sudoku_copy[i, j] = sudoku[i, j];
+            }
+        }
+
         bool end_game = false;
         int difficulty = 0;
         //MAIN GAME LOOP
@@ -55,8 +64,8 @@ class Program
             {
                 case 1:
                     Console.WriteLine("Vybrali jste si nejsnadnější obtížnost.");
-                    difficulty_1(sudoku, random);
-                    PrintSudoku(sudoku);
+                    difficulty_1(sudoku_copy, random);
+                    PrintSudoku(sudoku_copy);
                     break;
                 case 2:
                     Console.WriteLine("Vybrali jste si snadnou obtížnost.");
@@ -75,8 +84,8 @@ class Program
                     break;
                 case 7:
                     PrintSudoku(sudoku);
-                    difficulty_2(sudoku, random);
-                    PrintSudoku(sudoku);
+                    difficulty_2(sudoku_copy, random);
+                    PrintSudoku(sudoku_copy);
                     end_game = true;
                     break;
                 default:
@@ -174,9 +183,11 @@ class Program
                 }
                 if (i == 43 && number_of_full_numbers(sudoku) > 49) i = 0;
             }
+            Console.WriteLine("Počet čísel: " + number_of_full_numbers(sudoku));
         }
         //
         // difficulty - 3 - střední
+
         //
         // difficulty - 4 - těžká
         //
