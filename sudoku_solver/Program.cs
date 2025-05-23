@@ -28,14 +28,18 @@ class Program
         }
         answer = false;
 
-        int[,] sudoku_copy = new int[9, 9];
-        for (int i = 0; i < 9; i++)
+
+        static int[,] CopySudoku(int[,] original)
         {
-            for (int j = 0; j < 9; j++)
-            {
-                sudoku_copy[i, j] = sudoku[i, j];
-            }
+            int[,] copy = new int[9, 9];
+            for (int i = 0; i < 9; i++)
+                for (int j = 0; j < 9; j++)
+                    copy[i, j] = original[i, j];
+            return copy;
         }
+
+
+        int[,] sudoku_copy = CopySudoku(sudoku);
 
         bool end_game = false;
         int difficulty = 0;
@@ -66,6 +70,7 @@ class Program
                     Console.WriteLine("Vybrali jste si nejsnadnější obtížnost.");
                     difficulty_1(sudoku_copy, random);
                     PrintSudoku(sudoku_copy);
+                    end_game = true;
                     break;
                 case 2:
                     Console.WriteLine("Vybrali jste si snadnou obtížnost.");
@@ -83,7 +88,6 @@ class Program
                     end_game = true;
                     break;
                 case 7:
-                    PrintSudoku(sudoku);
                     difficulty_2(sudoku_copy, random);
                     PrintSudoku(sudoku_copy);
                     end_game = true;
@@ -117,27 +121,31 @@ class Program
         // difficulty - 1 - nejjednodušší
         static void difficulty_1(int[,] sudoku, Random random)
         {
-            for (int i = 0; i < 30; i++)
+            int i = 0;
+            while (i < 30 || number_of_full_numbers(sudoku) > 61)
             {
+                i++;
+
                 int random_x = random.Next(0, 9);
                 int random_y = random.Next(0, 9);
                 int original_number = sudoku[random_x, random_y];
 
-                if (sudoku[random_x, random_y] == 0)
+                if (original_number == 0)
                 {
                     i--;
                     continue;
                 }
 
                 sudoku[random_x, random_y] = 0;
+                int[,] copy_sudoku_temp = CopySudoku(sudoku);
                 validRow_Col(random_x, random_y, sudoku, out int count_row, out int count_col);
 
-                if (CountSolutions(sudoku) == 1)
+                if (CountSolutions(copy_sudoku_temp) == 1)
                 {
                     if (count_row < 5 || count_col < 5)
                     {
                         sudoku[random_x, random_y] = original_number;
-                        i++;
+                        i--;
                     }
 
                 }
@@ -145,16 +153,19 @@ class Program
                 {
                     sudoku[random_x, random_y] = original_number;
                 }
-                if (i == 28 && number_of_full_numbers(sudoku) > 61) i = 0;
             }
+            Console.WriteLine("Počet čísel: " + number_of_full_numbers(sudoku));
         }
         //
 
         // difficulty - 2 - snadná
         static void difficulty_2(int[,] sudoku, Random random)
         {
-            for (int i = 0; i < 45; i++)
+            int i = 0;
+            while (i < 45 || number_of_full_numbers(sudoku) > 49)
             {
+                i++;
+                
                 int random_x = random.Next(0, 9);
                 int random_y = random.Next(0, 9);
                 int original_number = sudoku[random_x, random_y];
@@ -166,14 +177,15 @@ class Program
                 }
 
                 sudoku[random_x, random_y] = 0;
+                int[,] copy_sudoku_temp = CopySudoku(sudoku);
                 validRow_Col(random_x, random_y, sudoku, out int count_row, out int count_col);
 
-                if (CountSolutions(sudoku) == 1)
+                if (CountSolutions(copy_sudoku_temp) == 1)
                 {
                     if (count_row < 4 || count_col < 4)
                     {
                         sudoku[random_x, random_y] = original_number;
-                        i++;
+                        i--;
                     }
 
                 }
@@ -181,7 +193,6 @@ class Program
                 {
                     sudoku[random_x, random_y] = original_number;
                 }
-                if (i == 43 && number_of_full_numbers(sudoku) > 49) i = 0;
             }
             Console.WriteLine("Počet čísel: " + number_of_full_numbers(sudoku));
         }
