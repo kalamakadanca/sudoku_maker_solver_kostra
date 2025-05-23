@@ -157,7 +157,7 @@ class Program
                     sudoku[random_x, random_y] = original_number;
                 }
             }
-            Console.WriteLine("Počet čísel: " + number_of_full_numbers(sudoku));
+            
         }
         //
 
@@ -197,37 +197,34 @@ class Program
                     sudoku[random_x, random_y] = original_number;
                 }
             }
-            Console.WriteLine("Počet čísel: " + number_of_full_numbers(sudoku));
         }
         //
 
         // difficulty - 3 - střední
         static void difficulty_3(int[,] sudoku)
         {
+            bool second_going_through = false;
             int i = 0;
-            while (i < 9)
+            int original_number;
+            
+            while (i < 9 || second_going_through == true && i < 9)
             {
-                i++;
-                int[,] sudoku_copy_temp = CopySudoku(sudoku);
-                
-                
-                if (i % 2 == 0)
+                if (i % 2 == 0 || second_going_through == true && i % 2 != 0)
                 {
                     for (int j = 0; j < 9; j++)
                     {
-                        if (j % 2 != 0)
+                        if (j % 2 == 0)
                         {
-                            int original_number = sudoku_copy_temp[j, i];
+                            original_number = sudoku[i, j];
                             sudoku[j, i] = 0;
 
                             validRow_Col(j, i, sudoku, out int count_row, out int count_col);
-
+                            int[,] sudoku_copy_temp = CopySudoku(sudoku);
                             if (CountSolutions(sudoku_copy_temp) == 1)
                             {
                                 if (count_row < 3 || count_col < 3)
                                 {
                                     sudoku[j, i] = original_number;
-                                    i--;
                                 }
                             }
                             else
@@ -237,11 +234,39 @@ class Program
                         }
                     }
                 }
-                else
+                else if (i % 2 != 0 || second_going_through == true && i % 2 == 0)
                 {
+                    for (int k = 8; k >= 0; k--)
+                    {
+                        if (k % 2 != 0)
+                        {
+                            original_number = sudoku[i, k];
+                            sudoku[k, i] = 0;
 
+                            validRow_Col(k, i, sudoku, out int count_row, out int count_col);
+                            int[,] sudoku_copy_temp = CopySudoku(sudoku);
+                            if (CountSolutions(sudoku_copy_temp) == 1)
+                            {
+                                if (count_row < 3 || count_col < 3)
+                                {
+                                    sudoku[k, i] = original_number;
+                                }
+                            }
+                            else
+                            {
+                                sudoku[k, i] = original_number;
+                            }
+                        }
+                    }
+                }
+                i++;
+                if (i == 9 && second_going_through == false)
+                {
+                    second_going_through = true;
+                    i = 0;
                 }
             }
+            Console.WriteLine("Počet čísel: " + number_of_full_numbers(sudoku));
         }
         //
         // difficulty - 4 - těžká
