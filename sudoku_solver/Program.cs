@@ -211,50 +211,50 @@ class Program
             {
                 if (i % 2 == 0 || second_going_through == true && i % 2 != 0)
                 {
-                    for (int j = 0; j < 9; j++)
+                    for (int j = 8; j >= 0; j--)
                     {
                         if (j % 2 == 0)
                         {
                             original_number = sudoku[i, j];
-                            sudoku[j, i] = 0;
+                            sudoku[i, j] = 0;
 
-                            validRow_Col(j, i, sudoku, out int count_row, out int count_col);
+                            validRow_Col(i, j, sudoku, out int count_row, out int count_col);
                             int[,] sudoku_copy_temp = CopySudoku(sudoku);
                             if (CountSolutions(sudoku_copy_temp) == 1)
                             {
                                 if (count_row < 3 || count_col < 3)
                                 {
-                                    sudoku[j, i] = original_number;
+                                    sudoku[i, j] = original_number;
                                 }
                             }
                             else
                             {
-                                sudoku[j, i] = original_number;
+                                sudoku[i, j] = original_number;
                             }
                         }
                     }
                 }
                 else if (i % 2 != 0 || second_going_through == true && i % 2 == 0)
                 {
-                    for (int k = 8; k >= 0; k--)
+                    for (int k = 0; k < 9; k++)
                     {
                         if (k % 2 != 0)
                         {
                             original_number = sudoku[i, k];
-                            sudoku[k, i] = 0;
+                            sudoku[i, k] = 0;
 
-                            validRow_Col(k, i, sudoku, out int count_row, out int count_col);
+                            validRow_Col(i, k, sudoku, out int count_row, out int count_col);
                             int[,] sudoku_copy_temp = CopySudoku(sudoku);
                             if (CountSolutions(sudoku_copy_temp) == 1)
                             {
                                 if (count_row < 3 || count_col < 3)
                                 {
-                                    sudoku[k, i] = original_number;
+                                    sudoku[i, k] = original_number;
                                 }
                             }
                             else
                             {
-                                sudoku[k, i] = original_number;
+                                sudoku[i, k] = original_number;
                             }
                         }
                     }
