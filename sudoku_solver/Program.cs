@@ -74,6 +74,9 @@ class Program
                     break;
                 case 2:
                     Console.WriteLine("Vybrali jste si snadnou obtížnost.");
+                    difficulty_2(sudoku_copy, random);
+                    PrintSudoku(sudoku_copy);
+                    end_game = true;
                     break;
                 case 3:
                     Console.WriteLine("Vybrali jste si střední obtížnost.");
@@ -88,7 +91,7 @@ class Program
                     end_game = true;
                     break;
                 case 7:
-                    difficulty_2(sudoku_copy, random);
+                    difficulty_3(sudoku_copy);
                     PrintSudoku(sudoku_copy);
                     end_game = true;
                     break;
@@ -197,8 +200,49 @@ class Program
             Console.WriteLine("Počet čísel: " + number_of_full_numbers(sudoku));
         }
         //
-        // difficulty - 3 - střední
 
+        // difficulty - 3 - střední
+        static void difficulty_3(int[,] sudoku)
+        {
+            int i = 0;
+            while (i < 9)
+            {
+                i++;
+                int[,] sudoku_copy_temp = CopySudoku(sudoku);
+                
+                
+                if (i % 2 == 0)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (j % 2 != 0)
+                        {
+                            int original_number = sudoku_copy_temp[j, i];
+                            sudoku[j, i] = 0;
+
+                            validRow_Col(j, i, sudoku, out int count_row, out int count_col);
+
+                            if (CountSolutions(sudoku_copy_temp) == 1)
+                            {
+                                if (count_row < 3 || count_col < 3)
+                                {
+                                    sudoku[j, i] = original_number;
+                                    i--;
+                                }
+                            }
+                            else
+                            {
+                                sudoku[j, i] = original_number;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+
+                }
+            }
+        }
         //
         // difficulty - 4 - těžká
         //
@@ -253,7 +297,7 @@ class Program
             return count;
         }
 
-        // recursive backtracking for level maintenance
+        // recursive backtracking for more than one solution
         static bool SolveMultiple(int[,] sudoku, ref int count, int maxCount)
         {
             for (int r = 0; r < 9; r++)
@@ -381,6 +425,9 @@ class Program
         }
         //
         // ###
+
+
+
 
         // printing the time
         sw.Stop();
