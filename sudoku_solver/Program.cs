@@ -80,9 +80,15 @@ class Program
                     break;
                 case 3:
                     Console.WriteLine("Vybrali jste si střední obtížnost.");
+                    difficulty_3(sudoku_copy);
+                    PrintSudoku(sudoku_copy);
+                    end_game = true;
                     break;
                 case 4:
                     Console.WriteLine("Vybrali jste si těžkou obtížnost.");
+                    difficulty_4(sudoku_copy);
+                    PrintSudoku(sudoku_copy);
+                    end_game = true;
                     break;
                 case 5:
                     Console.WriteLine("Vybrali jste si nejtěžší obtížnost.");
@@ -91,7 +97,7 @@ class Program
                     end_game = true;
                     break;
                 case 7:
-                    difficulty_3(sudoku_copy);
+                    difficulty_5(sudoku_copy);
                     PrintSudoku(sudoku_copy);
                     end_game = true;
                     break;
@@ -270,8 +276,78 @@ class Program
         }
         //
         // difficulty - 4 - těžká
+        static void difficulty_4(int[,] sudoku)
+        {
+            int original_number;
+            for (int i = 0; i < 9; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    for (int j = 8; j >= 0; j--)
+                    {
+                        original_number = sudoku[i, j];
+                        sudoku[i, j] = 0;
+                        int[,] sudoku_copy_temp = CopySudoku(sudoku);
+                        validRow_Col(i, j, sudoku, out int count_row, out int count_col);
+                        if (CountSolutions(sudoku_copy_temp) == 1)
+                        {
+                            if (count_row < 2 || count_col < 2)
+                            {
+                                sudoku[i, j] = original_number;
+                            }
+                        }
+                        else
+                        {
+                            sudoku[i, j] = original_number;
+                        }
+
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        original_number = sudoku[i, j];
+                        sudoku[i, j] = 0;
+                        int[,] sudoku_copy_temp = CopySudoku(sudoku);
+                        validRow_Col(i, j, sudoku, out int count_row, out int count_col);
+                        if (CountSolutions(sudoku_copy_temp) == 1)
+                        {
+                            if (count_row < 2 || count_col < 2)
+                            {
+                                sudoku[i, j] = original_number;
+                            }
+                        }
+                        else
+                        {
+                            sudoku[i, j] = original_number;
+                        }
+
+                    }
+                }
+                if (number_of_full_numbers(sudoku) < 23) break;
+            }
+            Console.WriteLine("Počet čísel: " + number_of_full_numbers(sudoku));
+        }
         //
         // difficulty - 5 - nejtěžší
+        static void difficulty_5(int[,] sudoku)
+        {
+            int original_number;
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    original_number = sudoku[i, j];
+                    sudoku[i, j] = 0;
+                    int[,] sudoku_copy_temp = CopySudoku(sudoku);
+                    if (CountSolutions(sudoku_copy_temp) != 1) sudoku[i, j] = original_number;
+                    if (number_of_full_numbers(sudoku) < 17) break;
+                }
+                if (number_of_full_numbers(sudoku) < 17) break;
+            }
+            Console.WriteLine("Počet čísel: " + number_of_full_numbers(sudoku));
+        }
         //
 
 
