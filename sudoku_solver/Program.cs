@@ -21,11 +21,6 @@ class Program
             Array.Clear(sudoku, 0, sudoku.Length);
             sprinkler(sudoku, random);
             answer = Solve(sudoku, answer);
-            /*if (answer)
-            *{
-            *    PrintSudoku(sudoku);
-            *}
-            */
         }
         answer = false;
 
@@ -45,6 +40,8 @@ class Program
         bool end_game = false;
         int difficulty = 0;
         bool hra = true;
+
+        int[,] sudoku_for_user_starter = new int[9, 9];
         //MAIN GAME LOOP
         while (!end_game)
         {
@@ -62,6 +59,7 @@ class Program
                 Console.WriteLine("4. Těžká");
                 Console.WriteLine("5. Nejtěžší");
                 Console.WriteLine("6. Vypnout hru");
+                Console.WriteLine("7. Pravidla hry");
                 Console.ResetColor();
                 while (true)
                 {
@@ -106,21 +104,24 @@ class Program
                     Console.WriteLine("Neplatná volba. Zkuste to znovu.");
                     break;
             }
-            //
+
+            sudoku_for_user_starter = CopySudoku(sudoku_for_user);
+
             Console.WriteLine();
+            //
 
             while (hra)
             {
-                PrintSudoku(sudoku_for_user);
+                PrintSudokuUser(sudoku, sudoku_for_user, sudoku_for_user_starter);
 
                 Console.WriteLine("Zadej řádek (1-9): ");
                 int row;
                 while (true)
                 {
-                    if (int.TryParse(Console.ReadLine(), out row) && row >= 0 && row < 9) break;
+                    if (int.TryParse(Console.ReadLine(), out row) && row >= 1 && row <= 9) break;
                     else
                     {
-                        Console.WriteLine("Neplatný vstup! Zadej prosím číslo od 0-8.");
+                        Console.WriteLine("Neplatný vstup! Zadej prosím číslo od 1-9.");
                     }
                 }
                 row--;
@@ -129,15 +130,15 @@ class Program
                 int col;
                 while (true)
                 {
-                    if (int.TryParse(Console.ReadLine(), out col) && col >= 0 && col < 9) break;
+                    if (int.TryParse(Console.ReadLine(), out col) && col >= 1 && col <= 9) break;
                     else
                     {
-                        Console.WriteLine("Neplatný vstup! Zadej prosím číslo od 0-8.");
+                        Console.WriteLine("Neplatný vstup! Zadej prosím číslo od 1-9.");
                     }
                 }
                 col--;
 
-                if (sudoku_for_user[row, col] != 0)
+                if (sudoku_for_user[row, col] == sudoku[row, col] && sudoku_for_user[row, col] != 0)
                 {
                     Console.WriteLine("Toto pole již obsahuje číslo. Zkus to znovu.");
                     continue;
@@ -154,25 +155,67 @@ class Program
                     }
                 }
 
-                if (number == sudoku[row, col])
+                sudoku_for_user[row, col] = number;
+
+                if (number_of_full_numbers(sudoku_for_user) == 81 && sudoku == sudoku_for_user)
                 {
-                    sudoku_for_user[row, col] = number;
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    sudoku_for_user[row, col] = number;
-                    Console.ResetColor();
+                    if (sudoku == sudoku_for_user)
+                    {
+                        Console.WriteLine("Gratulujeme! Vyřešil jsi sudoku!");
+                        hra = false;
+                    }
                 }
             }
         }
 
 
+        // PRINTING THE SUDOKU
+        // printing the sudoku for the user
+        static void PrintSudokuUser(int[,] sudoku, int[,] sudoku_for_user, int[,] sudoku_for_user_starter)
+        {
+            Console.WriteLine("Sudoku:");
 
+            for (int i = 0; i < 9; i++)
+            {
+                if (i % 3 == 0 && i != 0)
+                {
+                    Console.WriteLine("------+-------+------");
+                }
 
+                for (int j = 0; j < 9; j++)
+                {
+                    if (j % 3 == 0 && j != 0)
+                    {
+                        Console.Write("| ");
+                    }
 
+                    int number = sudoku_for_user[i, j];
 
+                    if (number == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.Write(". ");
+                        Console.ResetColor();
+                    }
+                    else if (sudoku_for_user_starter[i, j] == 0 && sudoku[i, j] == number)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.Write(number + " ");
+                        Console.ResetColor();
+                    }
+                    else if (number == sudoku[i, j]) Console.Write(number + " ");
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(number + " ");
+                        Console.ResetColor();
+                    }
 
+                }
+                Console.WriteLine();
+            }
+        }
+        //
 
         // printing the sudoku
         static void PrintSudoku(int[,] sudoku)
@@ -199,7 +242,7 @@ class Program
             }
         }
         //
-
+        // ###
 
         // DIFFICULTY ALGORITHMS
         // difficulty - 1 - nejjednodušší
@@ -238,7 +281,7 @@ class Program
                     sudoku[random_x, random_y] = original_number;
                 }
             }
-            
+
         }
         //
 
