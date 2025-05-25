@@ -40,10 +40,11 @@ class Program
         }
 
 
-        int[,] sudoku_copy = CopySudoku(sudoku);
+        int[,] sudoku_for_user = CopySudoku(sudoku);
 
         bool end_game = false;
         int difficulty = 0;
+        bool hra = true;
         //MAIN GAME LOOP
         while (!end_game)
         {
@@ -54,7 +55,7 @@ class Program
             while (difficulty == 0)
             {
                 Console.WriteLine("Vyber si úroveň obtížnosti:");
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("1. Nejsnadnější");
                 Console.WriteLine("2. Snadná");
                 Console.WriteLine("3. Střední");
@@ -62,38 +63,40 @@ class Program
                 Console.WriteLine("5. Nejtěžší");
                 Console.WriteLine("6. Vypnout hru");
                 Console.ResetColor();
-                difficulty = int.Parse(Console.ReadLine());
+                while (true)
+                {
+                    if (int.TryParse(Console.ReadLine(), out difficulty)) break;
+                    else
+                    {
+                        Console.WriteLine("Neplatný vstup! Zadej prosím číslo od 1-6.");
+                    }
+                }
             }
             switch (difficulty)
             {
                 case 1:
                     Console.WriteLine("Vybrali jste si nejsnadnější obtížnost.");
-                    difficulty_1(sudoku_copy, random);
-                    PrintSudoku(sudoku_copy);
+                    difficulty_1(sudoku_for_user, random);
                     end_game = true;
                     break;
                 case 2:
                     Console.WriteLine("Vybrali jste si snadnou obtížnost.");
-                    difficulty_2(sudoku_copy, random);
-                    PrintSudoku(sudoku_copy);
+                    difficulty_2(sudoku_for_user, random);
                     end_game = true;
                     break;
                 case 3:
                     Console.WriteLine("Vybrali jste si střední obtížnost.");
-                    difficulty_3(sudoku_copy);
-                    PrintSudoku(sudoku_copy);
+                    difficulty_3(sudoku_for_user);
                     end_game = true;
                     break;
                 case 4:
                     Console.WriteLine("Vybrali jste si těžkou obtížnost.");
-                    difficulty_4(sudoku_copy);
-                    PrintSudoku(sudoku_copy);
+                    difficulty_4(sudoku_for_user);
                     end_game = true;
                     break;
                 case 5:
                     Console.WriteLine("Vybrali jste si nejtěžší obtížnost.");
-                    difficulty_5(sudoku_copy);
-                    PrintSudoku(sudoku_copy);
+                    difficulty_5(sudoku_for_user);
                     end_game = true;
                     break;
                 case 6:
@@ -105,7 +108,70 @@ class Program
             }
             //
             Console.WriteLine();
+
+            while (hra)
+            {
+                PrintSudoku(sudoku_for_user);
+
+                Console.WriteLine("Zadej řádek (1-9): ");
+                int row;
+                while (true)
+                {
+                    if (int.TryParse(Console.ReadLine(), out row) && row >= 0 && row < 9) break;
+                    else
+                    {
+                        Console.WriteLine("Neplatný vstup! Zadej prosím číslo od 0-8.");
+                    }
+                }
+                row--;
+
+                Console.WriteLine("Zadej sloupec (1-9): ");
+                int col;
+                while (true)
+                {
+                    if (int.TryParse(Console.ReadLine(), out col) && col >= 0 && col < 9) break;
+                    else
+                    {
+                        Console.WriteLine("Neplatný vstup! Zadej prosím číslo od 0-8.");
+                    }
+                }
+                col--;
+
+                if (sudoku_for_user[row, col] != 0)
+                {
+                    Console.WriteLine("Toto pole již obsahuje číslo. Zkus to znovu.");
+                    continue;
+                }
+
+                Console.WriteLine("Zadej číslo (1-9): ");
+                int number;
+                while (true)
+                {
+                    if (int.TryParse(Console.ReadLine(), out number) && number >= 1 && number <= 9) break;
+                    else
+                    {
+                        Console.WriteLine("Neplatný vstup! Zadej prosím číslo od 1-9.");
+                    }
+                }
+
+                if (number == sudoku[row, col])
+                {
+                    sudoku_for_user[row, col] = number;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    sudoku_for_user[row, col] = number;
+                    Console.ResetColor();
+                }
+            }
         }
+
+
+
+
+
+
 
 
         // printing the sudoku
@@ -541,9 +607,6 @@ class Program
         }
         //
         // ###
-
-
-
 
         // printing the time
         sw.Stop();
