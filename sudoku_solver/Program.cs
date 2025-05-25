@@ -21,10 +21,11 @@ class Program
             Array.Clear(sudoku, 0, sudoku.Length);
             sprinkler(sudoku, random);
             answer = Solve(sudoku, answer);
-            if (answer)
-            {
-                PrintSudoku(sudoku);
-            }
+            /*if (answer)
+            *{
+            *    PrintSudoku(sudoku);
+            *}
+            */
         }
         answer = false;
 
@@ -60,7 +61,6 @@ class Program
                 Console.WriteLine("4. Těžká");
                 Console.WriteLine("5. Nejtěžší");
                 Console.WriteLine("6. Vypnout hru");
-                Console.WriteLine("7. zkoušení metody");
                 Console.ResetColor();
                 difficulty = int.Parse(Console.ReadLine());
             }
@@ -92,13 +92,11 @@ class Program
                     break;
                 case 5:
                     Console.WriteLine("Vybrali jste si nejtěžší obtížnost.");
-                    break;
-                case 6:
-                    end_game = true;
-                    break;
-                case 7:
                     difficulty_5(sudoku_copy);
                     PrintSudoku(sudoku_copy);
+                    end_game = true;
+                    break;
+                case 6:
                     end_game = true;
                     break;
                 default:
@@ -114,11 +112,22 @@ class Program
         static void PrintSudoku(int[,] sudoku)
         {
             Console.WriteLine("Sudoku:");
+
             for (int i = 0; i < 9; i++)
             {
+                if (i % 3 == 0 && i != 0)
+                {
+                    Console.WriteLine("------+-------+------");
+                }
                 for (int j = 0; j < 9; j++)
                 {
-                    Console.Write(sudoku[i, j] + " ");
+                    if (j % 3 == 0 && j != 0)
+                    {
+                        Console.Write("| ");
+                    }
+
+                    int number = sudoku[i, j];
+                    Console.Write(number == 0 ? ". " : number + " ");
                 }
                 Console.WriteLine();
             }
@@ -126,7 +135,7 @@ class Program
         //
 
 
-
+        // DIFFICULTY ALGORITHMS
         // difficulty - 1 - nejjednodušší
         static void difficulty_1(int[,] sudoku, Random random)
         {
@@ -275,6 +284,7 @@ class Program
             Console.WriteLine("Počet čísel: " + number_of_full_numbers(sudoku));
         }
         //
+
         // difficulty - 4 - těžká
         static void difficulty_4(int[,] sudoku)
         {
@@ -330,6 +340,7 @@ class Program
             Console.WriteLine("Počet čísel: " + number_of_full_numbers(sudoku));
         }
         //
+
         // difficulty - 5 - nejtěžší
         static void difficulty_5(int[,] sudoku)
         {
@@ -370,6 +381,7 @@ class Program
         }
         //
 
+        // validating the row and column
         static void validRow_Col(int row, int col, int[,] sudoku, out int count_row, out int count_col)
         {
             count_row = 0;
@@ -389,6 +401,7 @@ class Program
                 }
             }
         }
+        //
 
         // counting possible solutions
         static int CountSolutions(int[,] sudoku)
@@ -397,6 +410,7 @@ class Program
             SolveMultiple(sudoku, ref count, 2);
             return count;
         }
+        //
 
         // recursive backtracking for more than one solution
         static bool SolveMultiple(int[,] sudoku, ref int count, int maxCount)
@@ -425,7 +439,8 @@ class Program
             count++;
             return count >= maxCount;
         }
-
+        //
+        // ###
 
 
 
