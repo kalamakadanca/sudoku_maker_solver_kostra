@@ -112,16 +112,25 @@ class Program
 
             while (hra)
             {
+                if (number_of_full_numbers(sudoku_for_user) == 81 && FullSudoku(sudoku, sudoku_for_user))
+                {
+                    if (sudoku == sudoku_for_user)
+                    {
+                        Console.WriteLine("Gratulujeme! Vyřešil jsi sudoku!");
+                        hra = false;
+                    }
+                }
+
                 PrintSudokuUser(sudoku, sudoku_for_user, sudoku_for_user_starter);
 
                 Console.WriteLine("Zadej řádek (1-9): ");
                 int row;
                 while (true)
                 {
-                    if (int.TryParse(Console.ReadLine(), out row) && row >= 1 && row <= 9) break;
+                    if (int.TryParse(Console.ReadLine(), out row) && row >= 1 && row <= 9 || row == 20) break;
                     else
                     {
-                        Console.WriteLine("Neplatný vstup! Zadej prosím číslo od 1-9.");
+                        Console.WriteLine("Neplatný vstup! Zadej prosím řádek jako číslo od 1-9.");
                     }
                 }
                 row--;
@@ -133,12 +142,12 @@ class Program
                     if (int.TryParse(Console.ReadLine(), out col) && col >= 1 && col <= 9) break;
                     else
                     {
-                        Console.WriteLine("Neplatný vstup! Zadej prosím číslo od 1-9.");
+                        Console.WriteLine("Neplatný vstup! Zadej prosím sloupec jako číslo od 1-9.");
                     }
                 }
                 col--;
 
-                if (sudoku_for_user[row, col] == sudoku[row, col] && sudoku_for_user[row, col] != 0)
+                if (row != 19 && sudoku_for_user[row, col] == sudoku[row, col] && sudoku_for_user[row, col] != 0)
                 {
                     Console.WriteLine("Toto pole již obsahuje číslo. Zkus to znovu.");
                     continue;
@@ -151,22 +160,37 @@ class Program
                     if (int.TryParse(Console.ReadLine(), out number) && number >= 1 && number <= 9) break;
                     else
                     {
-                        Console.WriteLine("Neplatný vstup! Zadej prosím číslo od 1-9.");
+                        Console.WriteLine("Neplatný vstup! Zadej prosím číslo buňky od 1-9.");
                     }
                 }
-
-                sudoku_for_user[row, col] = number;
-
-                if (number_of_full_numbers(sudoku_for_user) == 81 && sudoku == sudoku_for_user)
+                if (row != 19) sudoku_for_user[row, col] = number;
+                else
                 {
-                    if (sudoku == sudoku_for_user)
+                    Solve(sudoku_for_user, false);
+                }
+
+
+            }
+        }
+
+
+
+        static bool FullSudoku(int[,] sudoku, int[,] sudoku_for_user)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (sudoku[i, j] != sudoku_for_user[i, j])
                     {
-                        Console.WriteLine("Gratulujeme! Vyřešil jsi sudoku!");
-                        hra = false;
+                        return false;
                     }
                 }
             }
+            return true;
         }
+
+
 
 
         // PRINTING THE SUDOKU
