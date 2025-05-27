@@ -6,6 +6,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.Diagnostics.Tracing.Parsers.Kernel;
 
 class Program
 {
@@ -16,13 +18,7 @@ class Program
         bool answer = false;
         Stopwatch sw = Stopwatch.StartNew();
 
-        while (!answer)
-        {
-            Array.Clear(sudoku, 0, sudoku.Length);
-            sprinkler(sudoku, random);
-            answer = Solve(sudoku, answer);
-        }
-        answer = false;
+        
 
 
         static int[,] CopySudoku(int[,] original)
@@ -33,24 +29,60 @@ class Program
                     copy[i, j] = original[i, j];
             return copy;
         }
+        static bool ContinueToPlay()
+        {
+            Console.WriteLine("Chceš pokračovat ve hře? (A/N)");
+            string answer = Console.ReadLine().ToUpper();
+
+            if (answer == "A")
+            {
+                return true;
+            }
+            else if (answer == "N")
+            {
+                Console.WriteLine("Děkujeme za hraní!");
+                return false;
+            }
+            else if (answer is null)
+            {
+                Console.WriteLine("Neplatná volba. Zadej 'A' pro pokračování nebo 'N' pro ukončení.");
+                return ContinueToPlay();
+            }
+            else
+            {
+                Console.WriteLine("Neplatná volba. Zadej 'A' pro pokračování nebo 'N' pro ukončení.");
+                return ContinueToPlay();
+            }
+        }
 
 
-        int[,] sudoku_for_user = CopySudoku(sudoku);
+        int[,] sudoku_for_user = new int[9, 9];
 
         bool end_game = false;
-        int difficulty = 0;
+        int difficulty;
         bool hra = true;
 
         int[,] sudoku_for_user_starter = new int[9, 9];
         //MAIN GAME LOOP
         while (!end_game)
         {
-            Console.WriteLine("Vítejte v sudoku!");
+            Console.WriteLine("Vítej v sudoku!");
             Console.WriteLine();
 
+            difficulty = 0;
             // choosing the difficulty
             while (difficulty == 0)
             {
+                while (!answer)
+                {
+                    Array.Clear(sudoku, 0, sudoku.Length);
+                    sprinkler(sudoku, random);
+                    answer = Solve(sudoku, answer);
+                }
+                answer = false;
+
+                sudoku_for_user = CopySudoku(sudoku);
+
                 Console.WriteLine("Vyber si úroveň obtížnosti:");
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("1. Nejsnadnější");
@@ -73,37 +105,40 @@ class Program
             switch (difficulty)
             {
                 case 1:
-                    Console.WriteLine("Vybrali jste si nejsnadnější obtížnost.");
+                    Console.WriteLine("Vybral sis nejsnadnější obtížnost.");
                     difficulty_1(sudoku_for_user, random);
-                    end_game = true;
+                    hra = true;
                     break;
                 case 2:
-                    Console.WriteLine("Vybrali jste si snadnou obtížnost.");
+                    Console.WriteLine("Vybral sis snadnou obtížnost.");
                     difficulty_2(sudoku_for_user, random);
-                    end_game = true;
+                    hra = true;
                     break;
                 case 3:
-                    Console.WriteLine("Vybrali jste si střední obtížnost.");
+                    Console.WriteLine("Vybrali sis střední obtížnost.");
                     difficulty_3(sudoku_for_user);
-                    end_game = true;
+                    hra = true;
                     break;
                 case 4:
-                    Console.WriteLine("Vybrali jste si těžkou obtížnost.");
+                    Console.WriteLine("Vybrali sis těžkou obtížnost.");
                     difficulty_4(sudoku_for_user);
-                    end_game = true;
+                    hra = true;
                     break;
                 case 5:
-                    Console.WriteLine("Vybrali jste si nejtěžší obtížnost.");
+                    Console.WriteLine("Vybrali sis nejtěžší obtížnost.");
                     difficulty_5(sudoku_for_user);
-                    end_game = true;
+                    hra = true;
                     break;
                 case 6:
+                    hra = false;
                     end_game = true;
                     break;
                 default:
                     Console.WriteLine("Neplatná volba. Zkuste to znovu.");
                     break;
             }
+
+            hra = true;
 
             sudoku_for_user_starter = CopySudoku(sudoku_for_user);
 
@@ -112,16 +147,15 @@ class Program
 
             while (hra)
             {
+                PrintSudokuUser(sudoku, sudoku_for_user, sudoku_for_user_starter);
+
                 if (number_of_full_numbers(sudoku_for_user) == 81 && FullSudoku(sudoku, sudoku_for_user))
                 {
-                    if (sudoku == sudoku_for_user)
-                    {
-                        Console.WriteLine("Gratulujeme! Vyřešil jsi sudoku!");
-                        hra = false;
-                    }
+                    Console.WriteLine("Gratulujeme! Vyřešil jsi sudoku!");
+                    hra = false;
+                    end_game = ContinueToPlay();
+                    break;
                 }
-
-                PrintSudokuUser(sudoku, sudoku_for_user, sudoku_for_user_starter);
 
                 Console.WriteLine("Zadej řádek (1-9): ");
                 int row;
@@ -168,8 +202,6 @@ class Program
                 {
                     Solve(sudoku_for_user, false);
                 }
-
-
             }
         }
 
