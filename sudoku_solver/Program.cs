@@ -36,12 +36,12 @@ class Program
 
             if (answer == "A")
             {
-                return true;
+                return false;
             }
             else if (answer == "N")
             {
                 Console.WriteLine("Děkujeme za hraní!");
-                return false;
+                return true;
             }
             else if (answer is null)
             {
