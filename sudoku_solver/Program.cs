@@ -40,13 +40,10 @@ class Program
             }
             else if (answer == "N")
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("Děkujeme za hraní!");
+                Console.ResetColor();
                 return true;
-            }
-            else if (answer is null)
-            {
-                Console.WriteLine("Neplatná volba. Zadej 'A' pro pokračování nebo 'N' pro ukončení.");
-                return ContinueToPlay();
             }
             else
             {
@@ -63,12 +60,13 @@ class Program
         bool hra = true;
 
         int[,] sudoku_for_user_starter = new int[9, 9];
+        
+        Console.WriteLine("Vítej v sudoku!");
+        Console.WriteLine();
         //MAIN GAME LOOP
         while (!end_game)
         {
-            Console.WriteLine("Vítej v sudoku!");
-            Console.WriteLine();
-
+            Console.Clear();
             difficulty = 0;
             // choosing the difficulty
             while (difficulty == 0)
@@ -115,17 +113,17 @@ class Program
                     hra = true;
                     break;
                 case 3:
-                    Console.WriteLine("Vybrali sis střední obtížnost.");
+                    Console.WriteLine("Vybral sis střední obtížnost.");
                     difficulty_3(sudoku_for_user);
                     hra = true;
                     break;
                 case 4:
-                    Console.WriteLine("Vybrali sis těžkou obtížnost.");
+                    Console.WriteLine("Vybral sis těžkou obtížnost.");
                     difficulty_4(sudoku_for_user);
                     hra = true;
                     break;
                 case 5:
-                    Console.WriteLine("Vybrali sis nejtěžší obtížnost.");
+                    Console.WriteLine("Vybral sis nejtěžší obtížnost.");
                     difficulty_5(sudoku_for_user);
                     hra = true;
                     break;
@@ -147,11 +145,14 @@ class Program
 
             while (hra)
             {
+                Console.Clear();
                 PrintSudokuUser(sudoku, sudoku_for_user, sudoku_for_user_starter);
 
                 if (number_of_full_numbers(sudoku_for_user) == 81 && FullSudoku(sudoku, sudoku_for_user))
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Gratulujeme! Vyřešil jsi sudoku!");
+                    Console.ResetColor();
                     hra = false;
                     end_game = ContinueToPlay();
                     break;
@@ -184,6 +185,8 @@ class Program
                 if (row != 19 && sudoku_for_user[row, col] == sudoku[row, col] && sudoku_for_user[row, col] != 0)
                 {
                     Console.WriteLine("Toto pole již obsahuje číslo. Zkus to znovu.");
+                    Console.WriteLine("Stistni libovolnou klávesu pro pokračování...");
+                    Console.ReadKey(true);
                     continue;
                 }
 
