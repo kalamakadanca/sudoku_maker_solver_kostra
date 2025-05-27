@@ -41,7 +41,7 @@ class Program
             else if (answer == "N")
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("Děkujeme za hraní!");
+                Console.WriteLine("Děkují za hraní!");
                 Console.ResetColor();
                 return true;
             }
@@ -103,40 +103,36 @@ class Program
             switch (difficulty)
             {
                 case 1:
-                    Console.WriteLine("Vybral sis nejsnadnější obtížnost.");
                     difficulty_1(sudoku_for_user, random);
                     hra = true;
                     break;
                 case 2:
-                    Console.WriteLine("Vybral sis snadnou obtížnost.");
                     difficulty_2(sudoku_for_user, random);
                     hra = true;
                     break;
                 case 3:
-                    Console.WriteLine("Vybral sis střední obtížnost.");
                     difficulty_3(sudoku_for_user);
                     hra = true;
                     break;
                 case 4:
-                    Console.WriteLine("Vybral sis těžkou obtížnost.");
                     difficulty_4(sudoku_for_user);
                     hra = true;
                     break;
                 case 5:
-                    Console.WriteLine("Vybral sis nejtěžší obtížnost.");
                     difficulty_5(sudoku_for_user);
                     hra = true;
                     break;
                 case 6:
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine("Děkuji za návštěvu!");
+                    Console.ResetColor();
                     hra = false;
                     end_game = true;
                     break;
                 default:
-                    Console.WriteLine("Neplatná volba. Zkuste to znovu.");
+                    Console.WriteLine("Neplatná volba. Zkus to znovu.");
                     break;
             }
-
-            hra = true;
 
             sudoku_for_user_starter = CopySudoku(sudoku_for_user);
 
@@ -151,7 +147,7 @@ class Program
                 if (number_of_full_numbers(sudoku_for_user) == 81 && FullSudoku(sudoku, sudoku_for_user))
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Gratulujeme! Vyřešil jsi sudoku!");
+                    Console.WriteLine("Gratuluji! Vyřešil jsi sudoku!");
                     Console.ResetColor();
                     hra = false;
                     end_game = ContinueToPlay();
@@ -449,7 +445,6 @@ class Program
                     i = 0;
                 }
             }
-            Console.WriteLine("Počet čísel: " + number_of_full_numbers(sudoku));
         }
         //
 
@@ -505,7 +500,6 @@ class Program
                 }
                 if (number_of_full_numbers(sudoku) < 23) break;
             }
-            Console.WriteLine("Počet čísel: " + number_of_full_numbers(sudoku));
         }
         //
 
@@ -525,7 +519,6 @@ class Program
                 }
                 if (number_of_full_numbers(sudoku) < 17) break;
             }
-            Console.WriteLine("Počet čísel: " + number_of_full_numbers(sudoku));
         }
         //
 
@@ -583,30 +576,55 @@ class Program
         // recursive backtracking for more than one solution
         static bool SolveMultiple(int[,] sudoku, ref int count, int maxCount)
         {
+            int minOptions = 10;
+            int minRow = -1, minCol = -1;
+
             for (int r = 0; r < 9; r++)
             {
                 for (int c = 0; c < 9; c++)
                 {
                     if (sudoku[r, c] == 0)
                     {
+                        int options = 0;
                         for (int num = 1; num <= 9; num++)
                         {
                             if (IsValidPlacement(r, c, num, sudoku))
-                            {
-                                sudoku[r, c] = num;
-                                if (SolveMultiple(sudoku, ref count, maxCount))
-                                    return true;
-                                sudoku[r, c] = 0;
-                            }
+                                options++;
                         }
-                        return false;
+
+                        if (options < minOptions)
+                        {
+                            minOptions = options;
+                            minRow = r;
+                            minCol = c;
+                        }
+
+                        if (minOptions == 1) break;
                     }
+                }
+                if (minOptions == 1) break;
+            }
+
+            if (minRow == -1)
+            {
+                count++;
+                return count >= maxCount;
+            }
+
+            for (int num = 1; num <= 9; num++)
+            {
+                if (IsValidPlacement(minRow, minCol, num, sudoku))
+                {
+                    sudoku[minRow, minCol] = num;
+                    if (SolveMultiple(sudoku, ref count, maxCount))
+                        return true;
+                    sudoku[minRow, minCol] = 0;
                 }
             }
 
-            count++;
-            return count >= maxCount;
+            return false;
         }
+
         //
         // ###
 
