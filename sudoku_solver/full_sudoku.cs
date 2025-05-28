@@ -29,7 +29,7 @@ namespace Full_Sudoku
         }
         //
 
-        // filling sudoku
+        // filling sudoku (backtracking algorithm)
         public static bool Solve(int[,] sudoku, bool answer)
         {
             for (int start_r = 0; start_r < 9; start_r++)
