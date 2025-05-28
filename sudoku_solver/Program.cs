@@ -53,7 +53,7 @@ class Program
 
         Console.WriteLine("Vítej v sudoku!");
         Console.WriteLine();
-        
+
         //MAIN GAME LOOP
         while (!end_game)
         {
@@ -65,8 +65,8 @@ class Program
                 while (!answer)
                 {
                     Array.Clear(sudoku, 0, sudoku.Length);
-                    Las_Vegas.Sprinkler(sudoku, random);
-                    answer = Las_Vegas.Solve(sudoku, answer);
+                    Full_Sudoku.Las_Vegas.Sprinkler(sudoku, random);
+                    answer = Full_Sudoku.Las_Vegas.Solve(sudoku, answer);
                 }
                 answer = false;
 
@@ -94,23 +94,23 @@ class Program
             switch (difficulty)
             {
                 case 1:
-                    Difficulties.Difficulty_1(sudoku_for_user, random);
+                    Difficulties.Difficulty_Levels.Difficulty_1(sudoku_for_user, random);
                     hra = true;
                     break;
                 case 2:
-                    Difficulties.Difficulty_2(sudoku_for_user, random);
+                    Difficulties.Difficulty_Levels.Difficulty_2(sudoku_for_user, random);
                     hra = true;
                     break;
                 case 3:
-                    Difficulties.Difficulty_3(sudoku_for_user);
+                    Difficulties.Difficulty_Levels.Difficulty_3(sudoku_for_user);
                     hra = true;
                     break;
                 case 4:
-                    Difficulties.Difficulty_4(sudoku_for_user);
+                    Difficulties.Difficulty_Levels.Difficulty_4(sudoku_for_user);
                     hra = true;
                     break;
                 case 5:
-                    Difficulties.Difficulty_5(sudoku_for_user);
+                    Difficulties.Difficulty_Levels.Difficulty_5(sudoku_for_user);
                     hra = true;
                     break;
                 case 6:
@@ -194,7 +194,7 @@ class Program
                 if (row != 19) sudoku_for_user[row, col] = number;
                 else
                 {
-                    Las_Vegas.Solve(sudoku_for_user, false);
+                    Full_Sudoku.Las_Vegas.Solve(sudoku_for_user, false);
                 }
             }
         }
