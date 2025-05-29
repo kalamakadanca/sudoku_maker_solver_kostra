@@ -90,6 +90,18 @@ class Program
                         Console.WriteLine("Neplatný vstup! Zadej prosím číslo od 1-6.");
                     }
                 }
+                if (difficulty == 7)
+                {
+                    Console.Clear();
+                    Console.WriteLine();
+                    Console.WriteLine("Pravidla hry:");
+                    Console.WriteLine("1. Cílem hry je vyplnit mřížku 9x9 čísly od 1 do 9 tak, aby v každém řádku, sloupci a 3x3 čtverci bylo každé číslo právě jednou.");
+                    Console.WriteLine("2. Některá čísla jsou již předvyplněná, tyto buňky nelze měnit.");
+                    Console.WriteLine("3. Pokud chceš vymazat číslo, zadej 0. <pouze červená čísla lze vymazat>");
+                    Console.WriteLine("4. Pokud chceš vyřešit sudoku, zadej 20 jako řádek.");
+                    difficulty = 0;
+                    Console.WriteLine();
+                }
             }
             switch (difficulty)
             {
