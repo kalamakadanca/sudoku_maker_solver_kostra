@@ -90,51 +90,50 @@ class Program
                         Console.WriteLine("Neplatný vstup! Zadej prosím číslo od 1-6.");
                     }
                 }
-                if (difficulty == 7)
+
+                switch (difficulty)
                 {
-                    Console.Clear();
-                    Console.WriteLine();
-                    Console.WriteLine("Pravidla hry:");
-                    Console.WriteLine("1. Cílem hry je vyplnit mřížku 9x9 čísly od 1 do 9 tak, aby v každém řádku, sloupci a 3x3 čtverci bylo každé číslo právě jednou.");
-                    Console.WriteLine("2. Některá čísla jsou již předvyplněná, tyto buňky nelze měnit.");
-                    Console.WriteLine("3. Pokud chceš vymazat číslo, zadej 0. <pouze červená čísla lze vymazat>");
-                    Console.WriteLine("4. Pokud chceš vyřešit sudoku, zadej 20 jako řádek.");
-                    difficulty = 0;
-                    Console.WriteLine();
+                    case 1:
+                        Difficulties.Difficulty_Levels.Difficulty_1(sudoku_for_user, random);
+                        hra = true;
+                        break;
+                    case 2:
+                        Difficulties.Difficulty_Levels.Difficulty_2(sudoku_for_user, random);
+                        hra = true;
+                        break;
+                    case 3:
+                        Difficulties.Difficulty_Levels.Difficulty_3(sudoku_for_user);
+                        hra = true;
+                        break;
+                    case 4:
+                        Difficulties.Difficulty_Levels.Difficulty_4(sudoku_for_user);
+                        hra = true;
+                        break;
+                    case 5:
+                        Difficulties.Difficulty_Levels.Difficulty_5(sudoku_for_user);
+                        hra = true;
+                        break;
+                    case 6:
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.WriteLine("Děkuji za návštěvu!");
+                        Console.ResetColor();
+                        hra = false;
+                        end_game = true;
+                        break;
+                    case 7:
+                        Console.Clear();
+                        Console.WriteLine();
+                        Console.WriteLine("Pravidla hry:");
+                        Console.WriteLine("1. Cílem hry je vyplnit mřížku 9x9 čísly od 1 do 9 tak, aby v každém řádku, sloupci a 3x3 čtverci bylo každé číslo právě jednou.");
+                        Console.WriteLine("2. Některá čísla jsou již předvyplněná, tyto buňky nelze měnit.");
+                        Console.WriteLine("3. Pokud chceš vymazat číslo, zadej 0. <pouze červená čísla lze vymazat>");
+                        Console.WriteLine("4. Pokud chceš vyřešit sudoku, zadej 20 jako řádek.");
+                        Console.WriteLine();
+                        break;
+                    default:
+                        Console.WriteLine("Neplatná volba. Zkus to znovu.");
+                        break;
                 }
-            }
-            switch (difficulty)
-            {
-                case 1:
-                    Difficulties.Difficulty_Levels.Difficulty_1(sudoku_for_user, random);
-                    hra = true;
-                    break;
-                case 2:
-                    Difficulties.Difficulty_Levels.Difficulty_2(sudoku_for_user, random);
-                    hra = true;
-                    break;
-                case 3:
-                    Difficulties.Difficulty_Levels.Difficulty_3(sudoku_for_user);
-                    hra = true;
-                    break;
-                case 4:
-                    Difficulties.Difficulty_Levels.Difficulty_4(sudoku_for_user);
-                    hra = true;
-                    break;
-                case 5:
-                    Difficulties.Difficulty_Levels.Difficulty_5(sudoku_for_user);
-                    hra = true;
-                    break;
-                case 6:
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.WriteLine("Děkuji za návštěvu!");
-                    Console.ResetColor();
-                    hra = false;
-                    end_game = true;
-                    break;
-                default:
-                    Console.WriteLine("Neplatná volba. Zkus to znovu.");
-                    break;
             }
 
             sudoku_for_user_starter = CopySudoku(sudoku_for_user);
