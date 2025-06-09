@@ -46,7 +46,7 @@ class Program
         int[,] sudoku_for_user = new int[9, 9];
 
         bool end_game = false;
-        int difficulty;
+        int difficulty = 0;
         bool hra = true;
 
         int[,] sudoku_for_user_starter;
@@ -57,7 +57,8 @@ class Program
         //MAIN GAME LOOP
         while (!end_game)
         {
-            Console.Clear();
+            if (difficulty != 7)
+                Console.Clear();
             difficulty = 0;
             // choosing the difficulty
             while (difficulty == 0)
@@ -123,13 +124,16 @@ class Program
                     case 7:
                         Console.Clear();
                         Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("Pravidla hry:");
                         Console.WriteLine("1. Cílem hry je vyplnit mřížku 9x9 čísly od 1 do 9 tak, aby v každém řádku, sloupci a 3x3 čtverci bylo každé číslo právě jednou.");
                         Console.WriteLine("2. Některá čísla jsou již předvyplněná, tyto buňky nelze měnit.");
                         Console.WriteLine("3. Pokud chceš vymazat číslo, zadej 0. <pouze červená čísla lze vymazat>");
-                        Console.WriteLine("4. Pokud chceš vyřešit sudoku, zadej 20 jako řádek.");
-                        Console.WriteLine();
+                        Console.WriteLine("4. Pokud chceš vyřešit sudoku, zadej 20 jako řádek. (nesmí obsahovat žádné červené číslo)");
+                        Console.ResetColor();
+                        hra = false;
                         break;
+
                     default:
                         Console.WriteLine("Neplatná volba. Zkus to znovu.");
                         break;
