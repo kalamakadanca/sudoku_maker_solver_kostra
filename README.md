@@ -48,4 +48,4 @@ Toto je hlavní program, ve kterém tyto algoritmy spojuji a gamifikuji. Probíh
 **Zdroje:** <br>
 **1.**	Článek - [Generating sudoku from easy to evil](http://zhangroup.aporc.org/images/files/Paper_3485.pdf) <br>
 **2.**	Ai – ChatGPT, github copilot <br>
-**3.**	Youtube - https://youtu.be/0roAZFaqSjw?si=eT139kOMlojjBHTx
+**3.**	Youtube - [Green Code - sudoku](https://youtu.be/0roAZFaqSjw?si=eT139kOMlojjBHTx)
