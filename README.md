@@ -1,51 +1,50 @@
-**Generování sudoku** <br>
+**Generating Sudoku puzzles** <br>
 **Daniela Luuová**
 <br>
 <br>
-**Abstrakt** <br>
-	Tato práce je zaměřená na optimální generování jednoznačně řešitelného sudoku. Zahrnuje analýzu existujících přístupů, návrh vlastního řešení a jeho realizaci v jazyce C#. Práce je formou hry pro vyzkoušení.
+**Abstract** <br>
+	This project focuses on optimal generation of Sudoku puzzles with a unique solution. Includes an analysis of existing approaches, the design of a custom solution, and its implementation in C#. The project is presented in the form of a game for hands-on experimentation.
 
-**Cíle:**
--	Vytvoření jednoznačně řešitelného sudoku
--	Možnost vyzkoušení si vygenerovaného sudoku
-
--	Vyzkoušet si návrh a implementaci algoritmů
--	Realizace a kompletizace obtížnějších programů
--	Práce s odborným článkem (dále jen článek)
+**Goals:**
+-	Creation of a uniquely solvable Sudoku
+-	Ability to try out the generated Sudoku
+-	Practicing the design and impelentation of algorithms
+-	Development and completion of more complex programs
+-	Working with a scientific paper (hereinafter reffered to as "paper")
 <br>
 
-**Použité technologie** <br>
-**Jazyk:** C# <br>
-**Prostředí:** .NET 9 <br>
-**Typ aplikace:** konzolová <br>
-**Knihovny:** System (Random, Console, ...), System.Diagnostics (Stopwatch), vlastní jmenné prostory (Full_Sudoku, Difficulties) <br>
-**Koncepty:** generování sudoku, řešení, rekurze, práce s maticemi, konzolové barvy, vstup/výstup. <br>
-**Algoritmy:** Las Vegas algoritmus, rekurzivní backtracking, globální randomizace čísel, přeskakování buněk, procházení ve tvaru S, procházení zleva doprava, technika prořezávání <br>
-**Článek:** [Generating sudoku from easy to evil](http://zhangroup.aporc.org/images/files/Paper_3485.pdf) <br>
-**AI:** malé detaily pro lepší přehlednost kódu, nápomoc se dvěma metodami (rekurzivní backtracking, rekurzivní backtracking s technikou prořezávání)
+**Used technologies** <br> <br>
+**Programming language:** C# <br>
+**Environment:** .NET 9 <br>
+**Application type:** Console application <br>
+**Libraries:** System (Random, Console, ...), System.Diagnostics (Stopwatch), custom namespaces (Full_Sudoku, Difficulties) <br>
+**Concepts:** Sudoku generation, solving, recursion, matrix manipulation, console colors, input/output. <br>
+**Algorithms:** Las Vegas algorithm, recursive backtracking, global number randomization, jumping one cell, wandering along "S", left to right then top to bottom, pruning technique <br>
+**Paper:** [Generating sudoku from easy to evil](http://zhangroup.aporc.org/images/files/Paper_3485.pdf) <br>
+**AI:** minor details for better code readability, assistance with two methods (recursive backtracking, recursive backtracking with pruning)
 
 
-**Popis fungování programu:**
+**Program Description:**
 
 **Full_Sudoku.cs** <br>
-V tomto souboru se vytváří vyplněné sudoku podle základních pravidel. Použila jsem Las Vegas algoritmus, ve kterém se používá předvyplnění 9x9 mřížky (dále jen mřížka) a rekurzivní backtracking.
+This file is responsible for generating a fully filled Sudoku grid according to the basic rules. I used Las Vegas algorithm, which combines partial pre-filling of the 9x9 grid (hereinafter reffered to as the grid) with recursive backtracking.
 
-Metody se pouští do doby, dokud nevznikne platné sudoku. (většinou jednou, šance pro nevytvoření validního sudoku jsou přibližně 4 %). 
+The methods are executed repeatedly until a valid Sudoku is generated (usually on the first attempt, probability of not generating a valid Sudoku is approximately 4%)
 
-Přibližný čas je 10ms.  
+The approximate execution time is 10ms.  
 
 **Difficulties.cs** <br>
-	V tomto souboru se tvoří 5 obtížnostních levelů. Pracuje se s vyplněnou mřížkou a postupně se odstraňují čísla pomocí dig-hole strategy (strategie vykopávání buněk).
+	This file defines five difficulty levels. It works with a completed grid and gradually removes numbers using the dig-hole strategy.
  
 **Program.cs** <br>
-Toto je hlavní program, ve kterém tyto algoritmy spojuji a gamifikuji. Probíhá zde práce s uživatelskými vstupy (validace vstupu, následné nakládání s vícero vstupy).
+This is the main program where all algorithms are combined and gamified. It handles user input (input validation and subsequent processing of multiple inputs).
 
-**Průběh hry probíhá následovně:**
-1.	Hráč si vybere obtížnost, popř. si nechá vysvětlit ovládací prvky a pravidla.
-2.	Zapne se mu samotná hra s danou obtížností.
-3.	Po dokončení si může vybrat, zda chce pokračovat, nebo ukončit hru.
+**Gameplay Flow:**
+1.	The player selects a difficulty level or chooses to view instructions and rules.
+2.	The game starts with the selected difficulty
+3.	After finishing, the player can choose whether to continue or exit the game.
 
-**Zdroje:** <br>
-**1.**	Článek - [Generating sudoku from easy to evil](http://zhangroup.aporc.org/images/files/Paper_3485.pdf) <br>
-**2.**	Ai – ChatGPT, github copilot <br>
+**Sources:** <br>
+**1.**	Paper - [Generating sudoku from easy to evil](http://zhangroup.aporc.org/images/files/Paper_3485.pdf) <br>
+**2.**	AI – ChatGPT, github copilot <br>
 **3.**	Youtube - [Green Code - sudoku](https://youtu.be/0roAZFaqSjw?si=eT139kOMlojjBHTx)
